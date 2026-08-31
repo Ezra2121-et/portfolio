@@ -1,0 +1,7 @@
+---
+const { label, href, action = 'view all' } = Astro.props;
+---
+<div class="section-head">
+  <h2><span>//</span> {label}</h2>
+  {href && <a class="text-link" href={href}>{action} <span>→</span></a>}
+</div>

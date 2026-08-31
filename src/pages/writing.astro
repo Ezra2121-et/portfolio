@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import { writing } from '../data/site';
+---
+<Base title="Writing" description="Security research notes and technical write-ups by Yosef Getnet.">
+  <div class="shell page">
+    <div class="kicker">Writing</div>
+    <h1>Notes & write-ups.</h1>
+    <p class="page-intro">A living collection of security research notes, technical deep-dives, and systems engineering write-ups. Each entry represents documented analysis and lessons learned from hands-on work.</p>
+    <div class="writing-list">
+      {writing.map(item => (
+        <a class="writing-row" href={item.href}>
+          <span class="writing-title">{item.title}</span>
+          <span class="writing-meta"><span>#{item.category}</span>{item.tags.map(tag => <span>#{tag}</span>)}</span>
+          <span class="writing-date">{item.date}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</Base>

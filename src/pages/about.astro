@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import { site, stack } from '../data/site';
+---
+<Base title="About" description="About Yosef Getnet.">
+  <div class="shell page">
+    <div class="kicker">About</div>
+    <h1>Background.</h1>
+    <p class="page-intro">Technical profile and background. Compiled from training, certifications, hands-on research, and documented security work.</p>
+    <div class="article">
+      <div class="prose">
+        <p>I'm Yosef Getnet, a security researcher and systems engineer with focus on cybersecurity, Linux infrastructure, network analysis, backend systems, and the technical foundations underlying modern security architecture.</p>
+        <p>I learn by building and documenting. I take things apart, rebuild them for a deeper understanding, and keep clear records of what I find so it can be referenced and communicated to others.</p>
+        <h2>Core Focus Areas</h2>
+        <p>Secure infrastructure. Systems reliability. Precise technical analysis. Systematic methodology. A personal technical record that documents real security work rather than conventional portfolio aesthetics.</p>
+        <h2>Technical Competencies</h2>
+        <div class="tags">{stack.map(s => <span class="tag">{s}</span>)}</div>
+        <h2>Professional Background</h2>
+        <p>University of Gondar · BSc Computer Science · 2026</p>
+        <p>Formal cybersecurity training combined with hands-on security lab practice, systems engineering research, and documented technical projects.</p>
+      </div>
+    </div>
+  </div>
+</Base>

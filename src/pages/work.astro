@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import { projects } from '../data/site';
+---
+<Base title="Work" description="Security research projects and systems engineering work by Yosef Getnet.">
+  <div class="shell page">
+    <div class="kicker">Work</div>
+    <h1>Projects & research.</h1>
+    <p class="page-intro">A collection of security research projects, incident analysis case studies, and systems engineering work. Each represents hands-on threat analysis and documented technical findings.</p>
+    <div class="grid-3">
+      {projects.map(project => (
+        <article class="project panel">
+          <div class="project-top"><span class="project-num">{project.number}</span><span class="project-status">{project.status}</span></div>
+          <div class="project-kind">{project.kind}</div>
+          <h2 class="project-title" style="margin-top:8px">{project.title}</h2>
+          <p class="project-desc">{project.description}</p>
+          <div class="tags">{project.stack.map(tag => <span class="tag">{tag}</span>)}</div>
+          <div class="project-foot"><span class="muted mono">{project.year}</span><a class="arrow mono" href={project.href}>open →</a></div>
+        </article>
+      ))}
+    </div>
+  </div>
+</Base>

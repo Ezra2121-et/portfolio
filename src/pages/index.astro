@@ -1,0 +1,519 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import SectionHead from '../components/SectionHead.astro';
+import { site, projects, writing, stack, currently } from '../data/site';
+
+const featured = projects.slice(0, 3);
+const recentWriting = writing.slice(0, 5);
+
+const metrics = [
+  ['03', 'featured projects'],
+  ['05', 'published pieces'],
+  ['08', 'core technologies'],
+  ['01', 'site to build well']
+];
+---
+
+<Base title="Yosef Getnet">
+  <div class="shell">
+
+    <!-- HERO -->
+    <section class="hero">
+
+      <div class="hero-main">
+
+        <!-- AVATAR -->
+        <div class="hero-identity">
+          <div
+            class="avatar"
+            aria-label="Yosef Getnet avatar placeholder"
+          >
+            YG
+          </div>
+        </div>
+
+        <!-- INTRODUCTION -->
+        <div class="hero-content">
+
+          <div class="kicker">Portfolio</div>
+
+          <h1>{site.name}</h1>
+
+          <p class="subtitle">
+            {site.title}
+          </p>
+
+          <p class="hero-intro">
+            {site.intro}
+          </p>
+
+          <!-- SOCIAL LINKS -->
+          <div class="socials">
+
+            <a
+              class="social-link"
+              href={site.socials.github}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Icon name="github" />
+              <span>GitHub</span>
+            </a>
+
+            <a
+              class="social-link"
+              href={site.socials.linkedin}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Icon name="linkedin" />
+              <span>LinkedIn</span>
+            </a>
+
+            <a
+              class="social-link"
+              href={site.socials.twitter}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Icon name="twitter" />
+              <span>X</span>
+            </a>
+
+            <a
+              class="social-link"
+              href={site.socials.discord}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Icon name="discord" />
+              <span>Discord</span>
+            </a>
+
+            <a
+              class="social-link"
+              href={`mailto:${site.email}`}
+            >
+              <Icon name="mail" />
+              <span>Email</span>
+            </a>
+
+          </div>
+
+          <!-- ACTIONS -->
+          <div class="button-row hero-actions">
+
+            <a
+              class="button primary"
+              href="/work"
+            >
+              View my work →
+            </a>
+
+            <a
+              class="button"
+              href={site.resume}
+            >
+              Resume ↗
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- WHOAMI -->
+      <aside class="panel whoami-panel">
+
+        <div class="panel-head">
+          Quick Info
+        </div>
+
+        <div class="panel-body">
+
+          <dl class="kv">
+
+            <dt>name</dt>
+            <dd>{site.name}</dd>
+
+            <dt>alias</dt>
+            <dd>{site.alias}</dd>
+
+            <dt>specialization</dt>
+            <dd>Security Research · Systems</dd>
+
+            <dt>expertise</dt>
+            <dd>Infrastructure · Threat Analysis</dd>
+
+            <dt>location</dt>
+            <dd>{site.location}</dd>
+
+            <dt>timezone</dt>
+            <dd>{site.timezone}</dd>
+
+            <dt>status</dt>
+            <dd class="status">{site.status}</dd>
+
+          </dl>
+
+        </div>
+
+      </aside>
+
+    </section>
+
+
+    <!-- DIVIDER -->
+    <div class="rule"></div>
+
+
+    <!-- FEATURED PROJECTS -->
+    <section
+      class="section"
+      id="work"
+    >
+
+      <SectionHead
+        label="Featured work"
+        href="/work"
+        action="view all work"
+      />
+
+      <div class="grid-3">
+
+        {featured.map(project => (
+
+          <article class="project panel">
+
+            <div class="project-top">
+
+              <span class="project-num">
+                {project.number}
+              </span>
+
+              <span class="project-status">
+                {project.status}
+              </span>
+
+            </div>
+
+            <div>
+
+              <div class="project-kind">
+                {project.kind}
+              </div>
+
+              <h3 class="project-title">
+                {project.title}
+              </h3>
+
+            </div>
+
+            <p class="project-desc">
+              {project.description}
+            </p>
+
+            <div class="tags">
+
+              {project.stack.map(tag => (
+                <span class="tag">
+                  {tag}
+                </span>
+              ))}
+
+            </div>
+
+            <div class="project-foot">
+
+              <span class="muted mono">
+                {project.year}
+              </span>
+
+              <a
+                class="arrow mono"
+                href={project.href}
+              >
+                open →
+              </a>
+
+            </div>
+
+          </article>
+
+        ))}
+
+      </div>
+
+    </section>
+
+
+    <!-- METRICS + TECH STACK -->
+    <section
+      class="section section-tight"
+    >
+
+      <div class="metrics">
+
+        {metrics.map(([num, label]) => (
+
+          <div class="metric">
+
+            <div class="num">
+              {num}
+            </div>
+
+            <div class="label">
+              {label}
+            </div>
+
+          </div>
+
+        ))}
+
+      </div>
+
+
+      <div class="stack-wrap">
+
+        <span class="label">
+          TECH STACK
+        </span>
+
+        <div class="tags">
+
+          {stack.map(item => (
+            <span class="tag">
+              {item}
+            </span>
+          ))}
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- WRITING -->
+    <section
+      class="section"
+      id="writing"
+    >
+
+      <SectionHead
+        label="Writing"
+        href="/writing"
+        action="view all posts"
+      />
+
+      <div class="writing-list">
+
+        {recentWriting.map(item => (
+
+          <a
+            class="writing-row"
+            href={item.href}
+          >
+
+            <span class="writing-title">
+              {item.title}
+            </span>
+
+            <span class="writing-meta">
+
+              {item.tags.map(tag => (
+                <span>
+                  #{tag}
+                </span>
+              ))}
+
+            </span>
+
+            <span class="writing-date">
+              {item.date}
+            </span>
+
+          </a>
+
+        ))}
+
+      </div>
+
+    </section>
+
+
+    <!-- CURRENT / ACTIVITY / CONTACT -->
+    <section class="section">
+
+      <div class="trio">
+
+        <!-- CURRENTLY -->
+        <div class="panel list-panel">
+
+          <div class="panel-head">
+            [ACTIVE] Current Research
+          </div>
+
+          <div class="list">
+
+            {currently.map(item => (
+
+              <div class="list-item">
+
+                <span>
+                  › {item}
+                </span>
+
+                <span>
+                  +
+                </span>
+
+              </div>
+
+            ))}
+
+          </div>
+
+        </div>
+
+
+        <!-- SELECTED ACTIVITY -->
+        <div class="panel list-panel">
+
+          <div class="panel-head">
+            [RECORD] Background & Training
+          </div>
+
+          <div class="list">
+
+            <div class="list-item">
+              <span>
+                INSA cybersecurity program
+              </span>
+              <span>
+                2026
+              </span>
+            </div>
+
+            <div class="list-item">
+              <span>
+                University of Gondar · CS
+              </span>
+              <span>
+                2026
+              </span>
+            </div>
+
+            <div class="list-item">
+              <span>
+                TryHackMe / web security labs
+              </span>
+              <span>
+                ongoing
+              </span>
+            </div>
+
+            <div class="list-item">
+              <span>
+                Linux + networking practice
+              </span>
+              <span>
+                ongoing
+              </span>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- CONTACT -->
+        <div class="panel list-panel">
+
+          <div class="panel-head">
+            Contact
+          </div>
+
+          <div class="callout">
+
+            <h3>
+              Get in Touch
+            </h3>
+
+            <p>
+              Interested in collaboration on security research, systems engineering, or technical projects. Open to discussing interesting problems.
+            </p>
+
+            <div class="button-row">
+
+              <a
+                class="button primary"
+                href={`mailto:${site.email}`}
+              >
+                <Icon name="mail" />
+                Email me
+              </a>
+
+            </div>
+
+
+            <div
+              class="socials"
+              style="margin-top:18px"
+            >
+
+              <a
+                class="social-link"
+                href={site.socials.github}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="GitHub"
+              >
+                <Icon name="github" />
+              </a>
+
+              <a
+                class="social-link"
+                href={site.socials.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="LinkedIn"
+              >
+                <Icon name="linkedin" />
+              </a>
+
+              <a
+                class="social-link"
+                href={site.socials.twitter}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="X"
+              >
+                <Icon name="twitter" />
+              </a>
+
+              <a
+                class="social-link"
+                href={site.socials.discord}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Discord"
+              >
+                <Icon name="discord" />
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+</Base>

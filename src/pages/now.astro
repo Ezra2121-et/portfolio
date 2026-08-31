@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import { currently } from '../data/site';
+---
+<Base title="Now" description="What Yosef Getnet is currently working on and researching.">
+  <div class="shell page">
+    <div class="kicker">Now</div>
+    <h1>Current focus.</h1>
+    <p class="page-intro">A living record of active research areas, ongoing projects, and current learning priorities. Updated as focus areas shift based on what I'm learning and building.</p>
+    <div class="trio">
+      <div class="panel list-panel"><div class="panel-head">Primary focus</div><div class="list">{currently.map(item => <div class="list-item"><span>› {item}</span><span>●</span></div>)}</div></div>
+      <div class="panel list-panel"><div class="panel-head">Learning</div><div class="list"><div class="list-item"><span>Linux systems</span><span>depth</span></div><div class="list-item"><span>Network analysis</span><span>practice</span></div><div class="list-item"><span>Security research</span><span>applied</span></div><div class="list-item"><span>Python automation</span><span>building</span></div></div></div>
+      <div class="panel list-panel"><div class="panel-head">Approach</div><div class="callout"><h3>Systematic practice.</h3><p>Documented daily work, accumulated technical knowledge, and compounded understanding through consistent security research and systems engineering practice.</p></div></div>
+    </div>
+  </div>
+</Base>

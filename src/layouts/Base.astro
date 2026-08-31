@@ -1,0 +1,49 @@
+---
+import '../styles/global.css';
+import { site } from '../data/site';
+const { title = site.name, description = site.intro } = Astro.props;
+---
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} — {site.title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0b0d0c" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <div class="site-noise" aria-hidden="true"></div>
+    <header class="nav shell">
+      <a class="brand" href="/" aria-label="Yosef Getnet home">Yosef Getnet<span>_</span></a>
+      <nav aria-label="Primary">
+        <a href="/" class={Astro.url.pathname === '/' ? 'active' : ''}>HOME</a>
+        <a href="/work" class={Astro.url.pathname.startsWith('/work') ? 'active' : ''}>WORK</a>
+        <a href="/about" class={Astro.url.pathname === '/about' ? 'active' : ''}>ABOUT</a>
+        <a href="/now" class={Astro.url.pathname === '/now' ? 'active' : ''}>NOW</a>
+        <a href="/writing" class={Astro.url.pathname.startsWith('/writing') ? 'active' : ''}>WRITING</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Toggle theme" title="Toggle light/dark theme"><span class="sun">◐</span><span class="dot"></span></button>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="footer shell">
+      <span>© 2026 Yosef Getnet</span>
+      <span>Security research · Systems engineering · Technical writing</span>
+      <span>Built with Astro <span class="mono">→</span></span>
+    </footer>
+    <script>
+      const root = document.documentElement;
+      const stored = localStorage.getItem('theme');
+      if (stored) root.dataset.theme = stored;
+      const toggle = document.querySelector('.theme-toggle');
+      toggle?.addEventListener('click', () => {
+        const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+        root.dataset.theme = next;
+        localStorage.setItem('theme', next);
+      });
+    </script>
+  </body>
+</html>
