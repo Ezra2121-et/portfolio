@@ -1,23 +1,36 @@
 ---
 import Base from '../layouts/Base.astro';
-import { site, stack } from '../data/site';
+import { site, stack, experience, certifications } from '../data/site';
 ---
-<Base title="About" description="About Yosef Getnet.">
+<Base title="About" description="About Yosef Getnet: IT support, networking and cybersecurity.">
   <div class="shell page">
     <div class="kicker">About</div>
     <h1>Background.</h1>
-    <p class="page-intro">Technical profile and background. Compiled from training, certifications, hands-on research, and documented security work.</p>
+    <p class="page-intro">Computer Science graduate focused on IT support, network operations and security operations.</p>
     <div class="article">
       <div class="prose">
-        <p>I'm Yosef Getnet, a security researcher and systems engineer with focus on cybersecurity, Linux infrastructure, network analysis, backend systems, and the technical foundations underlying modern security architecture.</p>
-        <p>I learn by building and documenting. I take things apart, rebuild them for a deeper understanding, and keep clear records of what I find so it can be referenced and communicated to others.</p>
-        <h2>Core Focus Areas</h2>
-        <p>Secure infrastructure. Systems reliability. Precise technical analysis. Systematic methodology. A personal technical record that documents real security work rather than conventional portfolio aesthetics.</p>
-        <h2>Technical Competencies</h2>
+        <p>{site.intro}</p>
+        <p>I go by Jossy. I speak Amharic natively and work in English professionally, and I am based in {site.location}.</p>
+
+        <h2>Experience</h2>
+        {experience.map(job => (
+          <>
+            <h3>{job.role}</h3>
+            <p><em>{job.org} · {job.period}</em></p>
+            <ul>{job.points.map(point => <li>{point}</li>)}</ul>
+          </>
+        ))}
+
+        <h2>Education</h2>
+        <p>University of Gondar · BSc Computer Science · Graduated 2026</p>
+
+        <h2>Certifications & training</h2>
+        <ul>{certifications.map(([org, what]) => <li><strong>{org}:</strong> {what}</li>)}</ul>
+
+        <h2>Technical competencies</h2>
         <div class="tags">{stack.map(s => <span class="tag">{s}</span>)}</div>
-        <h2>Professional Background</h2>
-        <p>University of Gondar · BSc Computer Science · 2026</p>
-        <p>Formal cybersecurity training combined with hands-on security lab practice, systems engineering research, and documented technical projects.</p>
+
+        <p style="margin-top:28px"><a class="arrow mono" href={site.resume}>Download my CV ↗</a></p>
       </div>
     </div>
   </div>

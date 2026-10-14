@@ -8,10 +8,10 @@ const featured = projects.slice(0, 3);
 const recentWriting = writing.slice(0, 5);
 
 const metrics = [
-  ['03', 'featured projects'],
-  ['05', 'published pieces'],
-  ['08', 'core technologies'],
-  ['01', 'site to build well']
+  ['09', 'member team led on internship'],
+  ['04', 'Cisco Academy courses'],
+  ['05', 'projects documented'],
+  ['05', 'published pieces']
 ];
 ---
 
@@ -25,12 +25,14 @@ const metrics = [
 
         <!-- AVATAR -->
         <div class="hero-identity">
-          <div
+          <img
             class="avatar"
-            aria-label="Yosef Getnet avatar placeholder"
-          >
-            YG
-          </div>
+            src="/jossy.webp"
+            alt="Portrait of Yosef Getnet"
+            width="300"
+            height="300"
+            fetchpriority="high"
+          />
         </div>
 
         <!-- INTRODUCTION -->
@@ -143,10 +145,16 @@ const metrics = [
             <dd>{site.alias}</dd>
 
             <dt>specialization</dt>
-            <dd>Security Research · Systems</dd>
+            <dd>IT Support · Networking</dd>
 
-            <dt>expertise</dt>
-            <dd>Infrastructure · Threat Analysis</dd>
+            <dt>skills</dt>
+            <dd>Linux · Python · Web Security</dd>
+
+            <dt>education</dt>
+            <dd>BSc Computer Science · 2026</dd>
+
+            <dt>languages</dt>
+            <dd>Amharic · English</dd>
 
             <dt>location</dt>
             <dd>{site.location}</dd>
@@ -354,7 +362,7 @@ const metrics = [
         <div class="panel list-panel">
 
           <div class="panel-head">
-            [ACTIVE] Current Research
+            [ACTIVE] Currently
           </div>
 
           <div class="list">
@@ -391,7 +399,7 @@ const metrics = [
 
             <div class="list-item">
               <span>
-                INSA cybersecurity program
+                INSA cybersecurity bootcamp
               </span>
               <span>
                 2026
@@ -400,7 +408,7 @@ const metrics = [
 
             <div class="list-item">
               <span>
-                University of Gondar · CS
+                University of Gondar · BSc CS
               </span>
               <span>
                 2026
@@ -409,16 +417,25 @@ const metrics = [
 
             <div class="list-item">
               <span>
-                TryHackMe / web security labs
+                AMECO · full-stack internship
               </span>
               <span>
-                ongoing
+                2025
               </span>
             </div>
 
             <div class="list-item">
               <span>
-                Linux + networking practice
+                Cisco Networking Academy
+              </span>
+              <span>
+                certificates
+              </span>
+            </div>
+
+            <div class="list-item">
+              <span>
+                CCNA + ISC2 CC preparation
               </span>
               <span>
                 ongoing
@@ -444,7 +461,7 @@ const metrics = [
             </h3>
 
             <p>
-              Interested in collaboration on security research, systems engineering, or technical projects. Open to discussing interesting problems.
+              Open to IT Support, NOC and junior SOC roles in Addis Ababa. Happy to talk about opportunities, projects or an interesting problem.
             </p>
 
             <div class="button-row">
