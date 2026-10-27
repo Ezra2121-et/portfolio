@@ -21,68 +21,42 @@ export const site = {
 export const projects = [
   {
     number: '01',
-    title: 'AI-Based Career Guide',
-    kind: 'Capstone · Full-stack Web Platform',
+    title: 'EthioNet Pulse',
+    kind: 'Network Monitoring · Reliability Platform',
     year: '2026',
-    status: 'Capstone',
+    status: 'Functional prototype',
     description:
-      'Web platform for skill-gap analysis, resume building and mock interviews, built as my Computer Science capstone project.',
-    stack: ['TypeScript', 'PostgreSQL', 'Prisma ORM', 'Gemini AI'],
-    href: '/work/ai-career-guide',
-    source: '',
+      'A self-hosted connectivity monitor that records target reachability, latency, packet loss, outage history and HTTP service health, with diagnostics and reliability reports.',
+    stack: ['Python', 'FastAPI', 'SQLite', 'APScheduler'],
+    href: '/work/ethionet-pulse',
+    source: 'https://github.com/Ezra2121-et/ethionet-pulse',
     demo: ''
   },
   {
     number: '02',
-    title: 'PortSwigger API Testing Report',
-    kind: 'Web Security · Lab Write-up',
-    year: '2026',
-    status: 'Completed',
+    title: 'AMECO Visitor Management System',
+    kind: 'Internship · Full-stack application',
+    year: '2025',
+    status: 'Internship project',
     description:
-      'Hands-on exploitation of hidden endpoints and mass assignment vulnerabilities in PortSwigger API testing labs, documented as a written report.',
-    stack: ['Web Security', 'API Testing', 'OWASP'],
-    href: '/work/portswigger-api-testing',
-    source: '',
+      'A role-based visitor management system built during my AMECO internship. I led a 9-member team working on visitor workflows, user management, reporting and audit logs.',
+    stack: ['React', 'Node.js', 'Express', 'MongoDB'],
+    href: '/work/ameco-visitor-system',
+    source: 'https://github.com/Ezra2121-et/AMECO-Visitor-System-Full-MERN-app',
     demo: ''
   },
   {
     number: '03',
-    title: 'HAWI E-commerce Website',
-    kind: 'Web Design · E-commerce',
+    title: 'AI-Based Career Guide',
+    kind: 'Computer Science Capstone · Career platform',
     year: '2026',
-    status: 'In progress',
+    status: 'Prototype',
     description:
-      'A premium editorial online store for a new Ethiopian perfume and fashion brand.',
-    stack: ['Web Design', 'E-commerce'],
-    href: '/work/hawi-ecommerce',
-    source: '',
-    demo: ''
-  },
-  {
-    number: '04',
-    title: 'Cyber Incident Reporting Assistant',
-    kind: 'INSA Bootcamp · Project Concept',
-    year: '2026',
-    status: 'Concept',
-    description:
-      'A project concept explored at the INSA Cybersecurity Summer Bootcamp for the Ethiopian context: automated incident reporting and tamper-evident digital evidence.',
-    stack: ['Python', 'Next.js', 'PostgreSQL'],
-    href: '/work/cyber-incident-reporting-assistant',
-    source: '',
-    demo: ''
-  },
-  {
-    number: '05',
-    title: 'Personal Portfolio',
-    kind: 'Web · Astro Site',
-    year: '2026',
-    status: 'Live',
-    description:
-      'This site: a fast, multi-page portfolio with project write-ups, essays and a light/dark toggle.',
-    stack: ['Astro', 'Vercel'],
-    href: 'https://github.com/Ezra2121-et/portfolio',
-    source: 'https://github.com/Ezra2121-et/portfolio',
-    demo: ''
+      'A career-support platform with job exploration, skill-gap analysis, resume workflows, learning paths and AI-assisted interview practice.',
+    stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Prisma', 'Gemini API'],
+    href: '/work/ai-career-guide',
+    source: 'https://github.com/Ezra2121-et/career-guide-ai',
+    demo: 'https://career-guide-ai-nine.vercel.app'
   }
 ];
 
@@ -125,15 +99,16 @@ export const writing = [
 ];
 
 export const stack = [
-  'Python', 'TypeScript', 'Linux', 'Bash', 'PostgreSQL', 'FastAPI', 'Prisma', 'Wireshark', 'Nmap', 'Cisco Packet Tracer'
+  'Python', 'TypeScript', 'Linux', 'Bash', 'FastAPI', 'PostgreSQL', 'SQLite',
+  'React', 'Node.js', 'MongoDB', 'Prisma', 'Wireshark', 'Nmap', 'Cisco Packet Tracer'
 ];
 
 export const currently = [
-  'CCNA preparation with Packet Tracer',
-  'Preparing for ISC2 Certified in Cybersecurity (CC)',
-  'Fedora Linux daily driver · Wireshark, Nmap, Bash',
-  'PortSwigger web & API security labs',
-  'Technical writing & documentation'
+  'Building EthioNet Pulse: connectivity checks, outage history and reliability reporting',
+  'CCNA preparation with Cisco Packet Tracer',
+  'TryHackMe free-room roadmap after completing Pentesting Fundamentals',
+  'Omarchy Linux daily driver · Wireshark, Nmap and Bash',
+  'Preparing for ISC2 Certified in Cybersecurity (CC)'
 ];
 
 export const experience = [
@@ -162,8 +137,9 @@ export const experience = [
     period: 'Ongoing',
     points: [
       'Completed PortSwigger API testing labs (hidden endpoints, mass assignment) and wrote up the findings.',
-      'Working through CCNA preparation with Packet Tracer; preparing for ISC2 Certified in Cybersecurity (CC).',
-      'Run Fedora Linux as my daily driver and practice with Wireshark, Nmap and Bash.'
+      'Completed TryHackMe Pentesting Fundamentals and continued along its free-room learning path.',
+      'Working through CCNA preparation with Packet Tracer and preparing for ISC2 Certified in Cybersecurity (CC).',
+      'Run Omarchy Linux as my daily driver and practice with Wireshark, Nmap and Bash.'
     ]
   }
 ];
