@@ -2,11 +2,11 @@
 import Base from '../layouts/Base.astro';
 import { writing } from '../data/site';
 ---
-<Base title="Writing" description="Security research notes and technical write-ups by Yosef Getnet.">
+<Base title="Writing" description="Personal learning notes and technical reflections by Yosef Getnet.">
   <div class="shell page">
     <div class="kicker">Writing</div>
     <h1>Notes & write-ups.</h1>
-    <p class="page-intro">A living collection of security research notes, technical deep-dives, and systems engineering write-ups. Each entry represents documented analysis and lessons learned from hands-on work.</p>
+    <p class="page-intro">Short learning notes and reflections from my work with Linux, networking, cybersecurity and systems. These are personal learning records—not formal research papers—and I will keep adding concrete lessons as I build and test projects.</p>
     <div class="writing-list">
       {writing.map(item => (
         <a class="writing-row" href={item.href}>
