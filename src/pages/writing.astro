@@ -124,67 +124,81 @@ const categoryLabel = (category?: string) => (category ?? 'notes').replace(/-/g,
   </div>
 
   <script>
-    const searchInput = document.querySelector('#writing-search');
-    const cards = Array.from(document.querySelectorAll('[data-writing-card]'));
-    const filterButtons = Array.from(document.querySelectorAll('[data-filter]'));
-    const resultCount = document.querySelector('#writing-result-count');
-    const emptyState = document.querySelector('#writing-empty');
-    const resetButton = document.querySelector('#writing-reset');
-    let activeFilter = 'all';
+    const setupWritingArchive = () => {
+      const searchInput = document.querySelector('#writing-search');
+      if (!(searchInput instanceof HTMLInputElement) || searchInput.dataset.archiveReady === 'true') return;
+      searchInput.dataset.archiveReady = 'true';
 
-    const updateArchive = () => {
-      const query = (searchInput?.value ?? '').trim().toLowerCase();
-      let visibleCount = 0;
+      const cards = Array.from(document.querySelectorAll('[data-writing-card]'));
+      const filterButtons = Array.from(document.querySelectorAll('[data-filter]'));
+      const resultCount = document.querySelector('#writing-result-count');
+      const emptyState = document.querySelector('#writing-empty');
+      const resetButton = document.querySelector('#writing-reset');
+      let activeFilter = 'all';
 
-      cards.forEach((card) => {
-        const categoryMatches = activeFilter === 'all' || card.dataset.category === activeFilter;
-        const searchMatches = !query || (card.dataset.search ?? '').includes(query);
-        const visible = categoryMatches && searchMatches;
-        card.hidden = !visible;
-        if (visible) visibleCount += 1;
+      const updateArchive = () => {
+        const query = searchInput.value.trim().toLowerCase();
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const categoryMatches = activeFilter === 'all' || card.dataset.category === activeFilter;
+          const searchMatches = !query || (card.dataset.search ?? '').includes(query);
+          const visible = categoryMatches && searchMatches;
+          card.hidden = !visible;
+          if (visible) visibleCount += 1;
+        });
+
+        if (resultCount) resultCount.textContent = visibleCount + (visibleCount === 1 ? ' note' : ' notes');
+        if (emptyState) emptyState.hidden = visibleCount !== 0;
+      };
+
+      filterButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          activeFilter = button.dataset.filter ?? 'all';
+          filterButtons.forEach((candidate) => {
+            const isActive = candidate === button;
+            candidate.classList.toggle('is-active', isActive);
+            candidate.setAttribute('aria-pressed', String(isActive));
+          });
+          updateArchive();
+        });
       });
 
-      if (resultCount) resultCount.textContent = visibleCount + (visibleCount === 1 ? ' note' : ' notes');
-      if (emptyState) emptyState.hidden = visibleCount !== 0;
-    };
+      searchInput.addEventListener('input', updateArchive);
 
-    filterButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        activeFilter = button.dataset.filter ?? 'all';
-        filterButtons.forEach((candidate) => {
-          const isActive = candidate === button;
-          candidate.classList.toggle('is-active', isActive);
-          candidate.setAttribute('aria-pressed', String(isActive));
+      resetButton?.addEventListener('click', () => {
+        searchInput.value = '';
+        activeFilter = 'all';
+        filterButtons.forEach((button) => {
+          const isActive = button.dataset.filter === 'all';
+          button.classList.toggle('is-active', isActive);
+          button.setAttribute('aria-pressed', String(isActive));
         });
         updateArchive();
+        searchInput.focus();
       });
-    });
 
-    searchInput?.addEventListener('input', updateArchive);
-
-    resetButton?.addEventListener('click', () => {
-      if (searchInput) searchInput.value = '';
-      activeFilter = 'all';
-      filterButtons.forEach((button) => {
-        const isActive = button.dataset.filter === 'all';
-        button.classList.toggle('is-active', isActive);
-        button.setAttribute('aria-pressed', String(isActive));
-      });
       updateArchive();
-      searchInput?.focus();
-    });
+    };
 
+    document.addEventListener('astro:page-load', setupWritingArchive);
+
+    // Keyboard shortcuts use the current page's search field after any navigation.
     document.addEventListener('keydown', (event) => {
+      const searchInput = document.querySelector('#writing-search');
+      if (!(searchInput instanceof HTMLInputElement)) return;
+
       const target = event.target;
       const typing = target instanceof HTMLElement &&
         (target.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName));
+
       if (event.key === '/' && !typing) {
         event.preventDefault();
-        searchInput?.focus();
+        searchInput.focus();
       }
-      if (event.key === 'Escape' && target === searchInput && searchInput?.value) {
+      if (event.key === 'Escape' && target === searchInput && searchInput.value) {
         searchInput.value = '';
-        updateArchive();
+        searchInput.dispatchEvent(new Event('input', { bubbles: true }));
       }
     });
   </script>
