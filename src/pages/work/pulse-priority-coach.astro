@@ -1,0 +1,57 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base
+  title="Pulse Priority Coach"
+  description="A task-planning and focus dashboard built with React, TypeScript, TanStack Start and Supabase."
+>
+  <div class="shell page">
+    <div class="kicker">// PROJECT 05 · PRODUCTIVITY APPLICATION · 2026</div>
+    <h1>Pulse Priority Coach.</h1>
+    <p class="page-intro">
+      A productivity dashboard designed to help people decide what to do next, manage focused work sessions, and reflect on progress instead of simply collecting a long to-do list.
+    </p>
+
+    <div class="button-row" style="margin: 18px 0 28px">
+      <a class="button primary" href="https://github.com/Ezra2121-et/pulse-priority-coach" target="_blank" rel="noreferrer">View source on GitHub ↗</a>
+    </div>
+
+    <div class="article">
+      <div class="prose">
+        <h2>Features in the codebase</h2>
+        <ul>
+          <li>Tasks with due dates, urgency, effort, status, tags, subtasks and dependencies.</li>
+          <li>A Kanban-style workflow with search and tag filtering.</li>
+          <li>An optional AI task-prioritisation coach that suggests an order and explains its top recommendations.</li>
+          <li>A configurable Pomodoro timer with focus and break sessions.</li>
+          <li>Productivity analytics, focus insights, streaks, badges and CSV/PDF-style exports.</li>
+          <li>Supabase authentication and user-scoped task/session records with Row Level Security policies in the database migrations.</li>
+        </ul>
+
+        <h2>Technology</h2>
+        <div class="tags">
+          <span class="tag">React</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">TanStack Start</span>
+          <span class="tag">TanStack Router</span>
+          <span class="tag">Tailwind CSS</span>
+          <span class="tag">Supabase</span>
+          <span class="tag">Recharts</span>
+        </div>
+
+        <h2>Setup and status</h2>
+        <p>
+          The repository now includes a concise setup guide and environment-variable example. Running the app requires a configured Supabase project and applying the SQL files under <code>supabase/migrations/</code>. AI suggestions require the optional server-side Lovable API key.
+        </p>
+        <p>
+          This is a code-backed prototype, not a claim of a currently hosted public service. Keep service-role keys on the server and verify the database policies and authentication settings before deploying publicly.
+        </p>
+
+        <p style="margin-top: 28px">
+          <a class="arrow mono" href="https://github.com/Ezra2121-et/pulse-priority-coach" target="_blank" rel="noreferrer">Inspect the source and setup instructions ↗</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</Base>
