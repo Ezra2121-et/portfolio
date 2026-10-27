@@ -16,7 +16,6 @@ const posts = Object.values(import.meta.glob<WritingModule>('./writing/*.md', { 
   .filter((post) => Boolean(post.frontmatter?.title && post.url))
   .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
 
-const featuredPost = posts[0];
 const formatDate = (date: string | Date) =>
   new Date(date).toLocaleDateString('en', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
 const readingTime = (post: WritingModule) =>
@@ -43,27 +42,6 @@ const categoryLabel = (category?: string) => (category ?? 'notes').replace(/-/g,
         <span>MADE IN ADDIS ABABA · UPDATED AS I LEARN</span>
       </div>
     </header>
-
-    {featuredPost && (
-      <section class="latest-note" aria-label="Latest note">
-        <div class="latest-label">
-          <span class="kicker">MOST RECENT NOTE</span>
-          <span class="latest-index">№ 01 / LATEST</span>
-        </div>
-        <a class="latest-content" href={featuredPost.url ?? '/writing'}>
-          <div class="latest-meta">
-            <span>{categoryLabel(featuredPost.frontmatter.category)}</span>
-            <span>·</span>
-            <time datetime={new Date(featuredPost.frontmatter.date).toISOString().slice(0, 10)}>{formatDate(featuredPost.frontmatter.date)}</time>
-            <span>·</span>
-            <span>{readingTime(featuredPost)} MIN READ</span>
-          </div>
-          <h2>{featuredPost.frontmatter.title}</h2>
-          <p>{featuredPost.frontmatter.description ?? 'A note from my learning notebook.'}</p>
-          <span class="latest-link">READ THE NOTE <span aria-hidden="true">↗</span></span>
-        </a>
-      </section>
-    )}
 
     <section class="archive-section" aria-label="Writing archive">
       <div class="archive-heading">
@@ -221,17 +199,6 @@ const categoryLabel = (category?: string) => (category ?? 'notes').replace(/-/g,
     .notebook-mark { width:96px; height:112px; flex:0 0 auto; border:1px solid var(--border-strong); border-left:3px solid var(--accent); display:flex; flex-direction:column; justify-content:space-between; padding:10px 8px; color:var(--text-muted); transform:rotate(2deg); font:8px/1.3 var(--mono); letter-spacing:.1em; }
     .notebook-mark strong { color:var(--text-light); font:600 15px/1.1 var(--sans); letter-spacing:.04em; }
     .writing-hero-foot { display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap; color:var(--text-muted); font:9px/1.5 var(--mono); letter-spacing:.07em; }
-    .latest-note { display:grid; grid-template-columns:150px 1fr; margin:26px 0 48px; border:1px solid var(--border-thin); background:var(--panel); }
-    .latest-label { padding:20px 16px; border-right:1px solid var(--border-thin); display:flex; flex-direction:column; justify-content:space-between; gap:20px; }
-    .latest-label .kicker { margin:0; font-size:9px; }
-    .latest-index { color:var(--text-muted); font:9px var(--mono); letter-spacing:.08em; }
-    .latest-content { display:block; padding:22px 25px; transition:background .2s ease; }
-    .latest-content:hover { background:var(--accent-soft); }
-    .latest-meta { display:flex; flex-wrap:wrap; gap:8px; color:var(--text-muted); text-transform:uppercase; font:9px/1.5 var(--mono); letter-spacing:.07em; }
-    .latest-meta span:first-child { color:var(--accent); }
-    .latest-content h2 { margin:13px 0 8px; color:var(--text-light); font:600 clamp(22px,3vw,30px)/1.2 var(--sans); letter-spacing:-.02em; }
-    .latest-content p { max-width:650px; margin:0 0 17px; color:var(--text-muted); font-size:12px; line-height:1.75; }
-    .latest-link { color:var(--accent); font:9px var(--mono); letter-spacing:.1em; }
     .archive-section { padding-bottom:42px; }
     .archive-heading { display:flex; justify-content:space-between; align-items:end; gap:18px; padding-bottom:13px; border-bottom:1px dashed var(--border-thin); }
     .archive-heading h2 { margin:0; color:var(--text-light); font:600 26px/1.2 var(--sans); }
@@ -279,9 +246,6 @@ const categoryLabel = (category?: string) => (category ?? 'notes').replace(/-/g,
     @media(max-width:760px) {
       .writing-hero-top { align-items:flex-start; }
       .notebook-mark { width:76px; height:96px; }
-      .latest-note { grid-template-columns:1fr; }
-      .latest-label { flex-direction:row; align-items:center; border-right:0; border-bottom:1px solid var(--border-thin); padding:12px 15px; }
-      .latest-content { padding:19px; }
       .archive-tools { grid-template-columns:1fr; gap:12px; }
       .filter-row { justify-content:flex-start; }
       .note-grid { grid-template-columns:1fr; }
