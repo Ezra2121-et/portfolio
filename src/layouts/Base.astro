@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 import { site } from '../data/site';
 const { title = site.name, description = site.intro } = Astro.props;
 ---
@@ -12,6 +13,7 @@ const { title = site.name, description = site.intro } = Astro.props;
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0b0d0c" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <ClientRouter fallback="animate" />
   </head>
   <body>
     <div class="site-noise" aria-hidden="true"></div>
@@ -38,8 +40,13 @@ const { title = site.name, description = site.intro } = Astro.props;
       const root = document.documentElement;
       const stored = localStorage.getItem('theme');
       if (stored) root.dataset.theme = stored;
-      const toggle = document.querySelector('.theme-toggle');
-      toggle?.addEventListener('click', () => {
+
+      // Delegate the click so the theme toggle keeps working after page transitions.
+      document.addEventListener('click', (event) => {
+        if (!(event.target instanceof Element)) return;
+        const toggle = event.target.closest('.theme-toggle');
+        if (!toggle) return;
+
         const next = root.dataset.theme === 'light' ? 'dark' : 'light';
         root.dataset.theme = next;
         localStorage.setItem('theme', next);
