@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/WritingPost.astro
-title: "A Practical Way to Think About Cybersecurity"
+title: "Questions I Ask When Looking at Security"
 date: 2026-08-11
 description: "A simple risk-first framework for thinking about cybersecurity as practical engineering."
 category: security
@@ -37,6 +37,6 @@ Testing also needs boundaries: only assess systems I own or have explicit permis
 
 A strong security note explains the scenario, evidence, impact, mitigation and remaining uncertainty. Naming a scanner or an attack technique is not enough by itself.
 
-## The takeaway
+## What I learned
 
 I want to approach cybersecurity as practical engineering: define what matters, test a clear question, record what happened, reduce risk, and be honest about what remains unresolved.
