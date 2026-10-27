@@ -166,10 +166,12 @@ const formatDate = (date: string | Date) =>
   </div>
 
   <script>
-    const githubCards = Array.from(document.querySelectorAll('[data-github-repo]'));
-    const githubSyncStatus = document.querySelector('#github-sync-status');
+    const syncGithubDates = () => {
+      const githubCards = Array.from(document.querySelectorAll('[data-github-repo]'));
+      const githubSyncStatus = document.querySelector('#github-sync-status');
 
-    if (githubCards.length && githubSyncStatus) {
+      if (!githubCards.length || !githubSyncStatus) return;
+
       fetch('https://api.github.com/users/Ezra2121-et/repos?per_page=100', {
         headers: { Accept: 'application/vnd.github+json' }
       })
@@ -197,7 +199,10 @@ const formatDate = (date: string | Date) =>
         .catch(() => {
           githubSyncStatus.textContent = 'GitHub dates are temporarily unavailable; project links and fallback dates remain visible.';
         });
-    }
+    };
+
+    // Astro's client router replaces page content; re-sync the new homepage each time.
+    document.addEventListener('astro:page-load', syncGithubDates);
   </script>
 
   <style>
