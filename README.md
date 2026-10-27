@@ -15,7 +15,7 @@ Project pages link to their public source repositories. Prototype and internship
 - Responsive multi-page portfolio with project case studies and technical notes.
 - Dark/light theme toggle with the preference saved in the browser.
 - Live project push dates fetched from GitHub’s public repository API when the homepage loads. If GitHub is unavailable or rate-limited, the portfolio keeps its project links and fallback dates.
-- Profile photo and downloadable CV stored under \`public/\`.
+- Profile photo and downloadable CV stored under `public/`.
 
 ## Technology
 
@@ -29,28 +29,28 @@ Project pages link to their public source repositories. Prototype and internship
 
 Requires Node.js and npm.
 
-\`\`\`bash
+```bash
 git clone https://github.com/Ezra2121-et/portfolio.git
 cd portfolio
 npm install
 npm run dev
-\`\`\`
+```
 
 ## Build and preview
 
-\`\`\`bash
+```bash
 npm run build
 npm run preview
-\`\`\`
+```
 
 ## Update content
 
-- \`src/data/site.ts\` — biography, contact links, featured projects, experience, training, technical stack and current focus.
-- \`src/pages/\` — homepage and project/about/writing pages.
-- \`src/styles/global.css\` — visual styling.
-- \`public/jossy.webp\` — profile photo used on the homepage.
-- \`public/resume.pdf\` — downloadable CV.
+- `src/data/site.ts` — biography, contact links, featured projects, experience, training, technical stack and current focus.
+- `src/pages/` — homepage and project/about/writing pages.
+- `src/styles/global.css` — visual styling.
+- `public/jossy.webp` — profile photo used on the homepage.
+- `public/resume.pdf` — downloadable CV.
 
 ## Deployment
 
-The Astro configuration targets static output for Vercel and uses \`https://jossy.dev\` as the canonical site URL. Connect this repository to Vercel to build and deploy commits from the chosen branch.
+The Astro configuration targets static output for Vercel and uses `https://jossy.dev` as the canonical site URL. Connect this repository to Vercel to build and deploy commits from the chosen branch.
