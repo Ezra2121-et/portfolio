@@ -6,7 +6,7 @@ import { projects } from '../data/site';
   <div class="shell page">
     <div class="kicker">Work</div>
     <h1>Projects & labs.</h1>
-    <p class="page-intro">Capstone, security lab write-ups and web projects from 2026. Source links and screenshots are added as each one is ready.</p>
+    <p class="page-intro">Selected projects backed by public repositories. Each entry is labelled honestly as a prototype or internship project, with source code linked wherever it is available.</p>
     <div class="grid-3">
       {projects.map(project => (
         <article class="project panel">
@@ -15,7 +15,14 @@ import { projects } from '../data/site';
           <h2 class="project-title" style="margin-top:8px">{project.title}</h2>
           <p class="project-desc">{project.description}</p>
           <div class="tags">{project.stack.map(tag => <span class="tag">{tag}</span>)}</div>
-          <div class="project-foot"><span class="muted mono">{project.year}</span><a class="arrow mono" href={project.href}>open →</a></div>
+          <div class="project-foot">
+            <span class="muted mono">{project.year}</span>
+            <span class="mono" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+              <a class="arrow mono" href={project.href}>case study →</a>
+              {project.source && <a class="arrow mono" href={project.source} target="_blank" rel="noreferrer">source ↗</a>}
+              {project.demo && <a class="arrow mono" href={project.demo} target="_blank" rel="noreferrer">project URL ↗</a>}
+            </span>
+          </div>
         </article>
       ))}
     </div>
