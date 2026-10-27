@@ -136,7 +136,6 @@ export const experience = [
     org: 'Independent',
     period: 'Ongoing',
     points: [
-      'Completed PortSwigger API testing labs (hidden endpoints, mass assignment) and wrote up the findings.',
       'Completed TryHackMe Pentesting Fundamentals and continued along its free-room learning path.',
       'Working through CCNA preparation with Packet Tracer and preparing for ISC2 Certified in Cybersecurity (CC).',
       'Run Omarchy Linux as my daily driver and practice with Wireshark, Nmap and Bash.'
