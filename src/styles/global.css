@@ -34,7 +34,7 @@ html[data-theme="light"] {
   --document: #f5f3ee;     /* Cream document color */
   
   --text: #1a1a18;         /* Near-black */
-  --text-light: #e8e6e1;   /* Light (rarely used in light mode) */
+  --text-light: #1a1a18;   /* Dark text for readable light mode */
   --text-muted: #6b6b66;   /* Medium gray */
   --text-faint: #8b8b86;   /* Faded gray */
   
