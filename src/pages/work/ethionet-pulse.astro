@@ -1,0 +1,73 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base
+  title="EthioNet Pulse"
+  description="A functional local network-monitoring prototype built by Yosef Getnet for connectivity diagnostics, outage history and reliability reporting."
+>
+  <div class="shell page">
+    <div class="kicker">// PROJECT 01 · NETWORK MONITORING · 2026</div>
+    <h1>EthioNet Pulse.</h1>
+    <p class="page-intro">
+      A lightweight, self-hosted connectivity and reliability monitor designed around a practical problem: give small organizations evidence about network problems instead of relying only on memory.
+    </p>
+
+    <div class="button-row" style="margin: 18px 0 28px">
+      <a class="button primary" href="https://github.com/Ezra2121-et/ethionet-pulse" target="_blank" rel="noreferrer">
+        View source on GitHub ↗
+      </a>
+    </div>
+
+    <div class="article">
+      <div class="prose">
+        <h2>The problem</h2>
+        <p>
+          When an office, school or small business experiences unstable internet, a vague report that “the internet was down” is difficult to investigate later. EthioNet Pulse records observations over time so a person troubleshooting the connection has useful evidence to review.
+        </p>
+
+        <h2>What I built</h2>
+        <ul>
+          <li>Scheduled reachability checks against configurable network targets, with response-time measurements.</li>
+          <li>Stored check history and outage records in a local SQLite database.</li>
+          <li>Network-quality samples for packet loss, latency and jitter where the host system supports them.</li>
+          <li>HTTP(S) service monitoring with response codes, response times and service-incident history.</li>
+          <li>On-demand diagnostics that compare the local gateway, public targets, DNS resolution and configured HTTP services.</li>
+          <li>Reliability reports and CSV/JSON exports, plus optional Telegram notifications for confirmed outage and recovery transitions.</li>
+          <li>A FastAPI interface and dashboard pages for connectivity, services, quality, diagnosis, incidents, reports and settings.</li>
+        </ul>
+
+        <h2>How it works</h2>
+        <ol>
+          <li>A scheduler runs checks at a configurable interval.</li>
+          <li>Results are saved with timestamps and supporting measurements.</li>
+          <li>Consecutive-failure and recovery thresholds reduce alerts from isolated failed checks.</li>
+          <li>The dashboard and report endpoints present the history for investigation.</li>
+        </ol>
+
+        <h2>Technology</h2>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">SQLAlchemy</span>
+          <span class="tag">SQLite</span>
+          <span class="tag">APScheduler</span>
+          <span class="tag">Jinja2</span>
+          <span class="tag">JavaScript</span>
+        </div>
+
+        <h2>Validation and limitations</h2>
+        <p>
+          The project is a functional local/self-hosted prototype, not a hosted public monitoring service or a guaranteed SLA monitor. During local validation, the health, status, outage, statistics and history routes responded successfully. The README includes installation instructions, a demo checklist and automated tests.
+        </p>
+        <p>
+          A failed ping does not prove all internet traffic is unavailable: ICMP may be filtered while HTTP traffic still works. Availability estimates must also be read alongside measurement coverage. The current prototype uses an instance-wide monitoring workspace and is not yet ready for unrelated customer tenants on a public deployment.
+        </p>
+
+        <p style="margin-top: 28px">
+          <a class="arrow mono" href="https://github.com/Ezra2121-et/ethionet-pulse" target="_blank" rel="noreferrer">Read the README and inspect the code ↗</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</Base>
