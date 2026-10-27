@@ -196,11 +196,13 @@ main {
 }
 
 .nav nav a:hover,
-.nav nav a.active {
+.nav nav a.active,
+.nav nav a[aria-current="page"] {
   color: var(--accent);
 }
 
-.nav nav a.active::after {
+.nav nav a.active::after,
+.nav nav a[aria-current="page"]::after {
   content: "";
   position: absolute;
   bottom: -1px;
