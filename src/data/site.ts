@@ -60,44 +60,6 @@ export const projects = [
   }
 ];
 
-export const writing = [
-  {
-    title: 'Notes from Learning Linux',
-    date: '2026-08-30',
-    category: 'notes',
-    tags: ['linux', 'systems', 'documentation'],
-    href: '/writing/notes-from-learning-linux'
-  },
-  {
-    title: 'What I Want My Portfolio to Say Without Saying It',
-    date: '2026-08-29',
-    category: 'writeup',
-    tags: ['research', 'methodology'],
-    href: '/writing/what-i-want-my-portfolio-to-say'
-  },
-  {
-    title: 'Learning Networking by Building Things',
-    date: '2026-08-24',
-    category: 'notes',
-    tags: ['networking', 'infrastructure', 'hands-on'],
-    href: '/writing/learning-networking-by-building'
-  },
-  {
-    title: 'Why I Keep Coming Back to Systems',
-    date: '2026-08-18',
-    category: 'writeup',
-    tags: ['systems', 'engineering', 'practice'],
-    href: '/writing/why-i-keep-coming-back-to-systems'
-  },
-  {
-    title: 'A Practical Way to Think About Cybersecurity',
-    date: '2026-08-11',
-    category: 'case-study',
-    tags: ['security', 'threat-analysis', 'methodology'],
-    href: '/writing/practical-cybersecurity'
-  }
-];
-
 export const stack = [
   'Python', 'TypeScript', 'Linux', 'Bash', 'FastAPI', 'PostgreSQL', 'SQLite',
   'React', 'Node.js', 'MongoDB', 'Prisma', 'Wireshark', 'Nmap', 'Cisco Packet Tracer'
