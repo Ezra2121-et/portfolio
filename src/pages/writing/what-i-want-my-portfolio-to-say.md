@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/WritingPost.astro
-title: "What I Want My Portfolio to Say Without Saying It"
+title: "What I Want Recruiters to See in My Projects"
 date: 2026-08-29
 description: "The kind of evidence I want a portfolio to show beyond a list of skills."
 category: reflection
@@ -10,9 +10,9 @@ tags:
   - process
 ---
 
-## A portfolio is a signal
+## Show the work clearly
 
-I do not want this site to shout that I am passionate, innovative, or a problem solver. Those words are cheap. The work should make the point.
+I do not want to fill my site with claims about being passionate or a problem solver. I would rather show what I built, explain my part, and let people inspect the code.
 
 A recruiter should be able to open a project, understand the problem in a minute, find the source code, and see what I actually contributed.
 
@@ -33,6 +33,6 @@ The project pages show what I build. The Now page shows what currently has my at
 
 Together, those pages should make it easier to understand not just what I know, but how I work through a problem.
 
-## The rule
+## What I am aiming for
 
-Everything on this site should earn its place. If an element does not help a visitor understand the work or the person behind it, it probably does not belong.
+I want the site to be easy to scan and honest about what is finished. A recruiter should be able to find a project, understand my contribution, and open its source code without digging around.
