@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/WritingPost.astro
-title: "A Ping Is a Clue, Not a Verdict"
+title: "What a Failed Ping Actually Tells Me"
 date: 2026-10-27
 description: "What one failed network check taught me about interpreting connectivity evidence carefully."
 category: networking
@@ -12,7 +12,7 @@ tags:
 
 ## The observation
 
-While checking EthioNet Pulse locally, one configured public target—`1.1.1.1`—failed to respond, while `8.8.8.8` and `9.9.9.9` responded. The monitor recorded that mixed result instead of treating the three targets as one yes-or-no signal.
+While testing EthioNet Pulse on my machine, `1.1.1.1` did not respond to a ping. The other two targets, `8.8.8.8` and `9.9.9.9`, did respond. EthioNet Pulse recorded each result separately. That gives me more information than one overall online or offline label.
 
 That distinction matters. One target not answering is evidence about that check, not proof that every internet service is unavailable.
 
@@ -40,9 +40,9 @@ The project records individual target checks, keeps history, and includes a diag
 
 The reliability report also needs to show measurement coverage alongside an availability estimate. If the monitor was stopped or measurements are missing, that time should not silently be treated as healthy uptime.
 
-## What I am taking away
+## What I learned
 
-Monitoring is not just about collecting more numbers. It is about describing exactly what each measurement proves—and what it does not prove.
+Monitoring is useful when I understand what each check measures. A failed ping is one piece of evidence, not a full explanation of the network.
 
 I want EthioNet Pulse to help someone ask a better next question, not to pretend that one failed packet explains an entire network.
 
