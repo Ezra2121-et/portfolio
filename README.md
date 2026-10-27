@@ -1,30 +1,56 @@
-# Jossy Portfolio
+# Yosef Getnet — Portfolio
 
-A fast, static-first personal website for Yosef Getnet. Built with Astro and plain CSS, designed around a personal-internet / technical-notebook aesthetic.
+A fast, static-first personal portfolio built with Astro and plain CSS. It presents my work across IT support, networking, cybersecurity and practical software projects.
 
-## Local development
+## Featured work
 
-```bash
+- **EthioNet Pulse** — a functional local network-monitoring prototype for connectivity checks, outage history, diagnostics and reliability reporting.
+- **AMECO Visitor Management System** — a role-based full-stack application developed during my internship at Amhara Media Corporation, where I led a 9-member team.
+- **AI-Based Career Guide** — a Computer Science capstone prototype for career exploration, skill-gap analysis, resume workflows, learning paths and AI-assisted interview practice.
+
+Project pages link to their public source repositories. Prototype and internship work is labelled clearly; the portfolio does not present local projects as hosted production services.
+
+## Features
+
+- Responsive multi-page portfolio with project case studies and technical notes.
+- Dark/light theme toggle with the preference saved in the browser.
+- Live project push dates fetched from GitHub’s public repository API when the homepage loads. If GitHub is unavailable or rate-limited, the portfolio keeps its project links and fallback dates.
+- Profile photo and downloadable CV stored under \`public/\`.
+
+## Technology
+
+- Astro
+- TypeScript for content data
+- HTML and plain CSS
+- GitHub public REST API for project push timestamps
+- Vercel static output
+
+## Run locally
+
+Requires Node.js and npm.
+
+\`\`\`bash
+git clone https://github.com/Ezra2121-et/portfolio.git
+cd portfolio
 npm install
 npm run dev
-```
+\`\`\`
 
-## Build
+## Build and preview
 
-```bash
+\`\`\`bash
 npm run build
 npm run preview
-```
+\`\`\`
 
-## Deploy to Vercel
+## Update content
 
-Import the repository into Vercel. Astro is detected automatically. The project is configured for static output.
+- \`src/data/site.ts\` — biography, contact links, featured projects, experience, training, technical stack and current focus.
+- \`src/pages/\` — homepage and project/about/writing pages.
+- \`src/styles/global.css\` — visual styling.
+- \`public/jossy.webp\` — profile photo used on the homepage.
+- \`public/resume.pdf\` — downloadable CV.
 
-## First things to edit
+## Deployment
 
-1. `src/data/site.ts` — name, links, email, projects, writing, and stack.
-2. Replace the `YG` avatar block with a real image when ready.
-3. Add `public/resume.pdf`.
-4. Replace placeholder social URLs and email.
-5. Update or remove demo content before publishing.
-# portfolio
+The Astro configuration targets static output for Vercel and uses \`https://jossy.dev\` as the canonical site URL. Connect this repository to Vercel to build and deploy commits from the chosen branch.
