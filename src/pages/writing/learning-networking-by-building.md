@@ -42,6 +42,6 @@ This is one of the reasons I built EthioNet Pulse: a sequence of timestamped mea
 
 A screenshot or log is most useful when it has context: what was tested, when it happened, what the expected result was, and what limitations apply. Measurements without context can create false confidence.
 
-## The takeaway
+## What I learned
 
-Good networking practice is not just getting a packet from A to B. It is learning how to tell what happened along the way—and being honest about what I still do not know.
+Good networking practice is not just getting a packet from A to B. It is learning how to check what happened along the way and being honest about what I do not know yet.
