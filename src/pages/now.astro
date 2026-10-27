@@ -1,16 +1,159 @@
 ---
 import Base from '../layouts/Base.astro';
-import { currently } from '../data/site';
+
+const currentLearning = [
+  {
+    number: '01',
+    title: 'Network troubleshooting',
+    status: 'Building',
+    description: 'Use EthioNet Pulse to collect evidence about reachability, latency, packet loss, HTTP checks and outage history rather than guessing at a connection problem.'
+  },
+  {
+    number: '02',
+    title: 'Linux & command-line tools',
+    status: 'Practising',
+    description: 'Keep working in Omarchy Linux with Bash, Wireshark and Nmap, and document what I learn from hands-on troubleshooting.'
+  },
+  {
+    number: '03',
+    title: 'Networking foundations',
+    status: 'Studying',
+    description: 'Continue Cisco Packet Tracer practice and CCNA preparation, focusing on making routing and network behaviour visible in labs.'
+  },
+  {
+    number: '04',
+    title: 'Cybersecurity fundamentals',
+    status: 'Studying',
+    description: 'Continue the beginner-to-advanced TryHackMe free-room roadmap after completing Pentesting Fundamentals, while preparing for ISC2 Certified in Cybersecurity.'
+  }
+];
 ---
-<Base title="Now" description="What Yosef Getnet is currently working on and researching.">
-  <div class="shell page">
-    <div class="kicker">Now</div>
-    <h1>Current focus.</h1>
-    <p class="page-intro">What I am studying and building right now, updated as my focus shifts.</p>
-    <div class="trio">
-      <div class="panel list-panel"><div class="panel-head">Primary focus</div><div class="list">{currently.map(item => <div class="list-item"><span>› {item}</span><span>●</span></div>)}</div></div>
-      <div class="panel list-panel"><div class="panel-head">Learning</div><div class="list"><div class="list-item"><span>Cisco networking (CCNA)</span><span>prep</span></div><div class="list-item"><span>TryHackMe free-room roadmap</span><span>labs</span></div><div class="list-item"><span>ISC2 CC</span><span>prep</span></div><div class="list-item"><span>Web &amp; API security</span><span>labs</span></div><div class="list-item"><span>Python automation for monitoring</span><span>building</span></div></div></div>
-      <div class="panel list-panel"><div class="panel-head">Approach</div><div class="callout"><h3>Systematic practice.</h3><p>I learn by doing and writing it down: labs, notes and write-ups that show how I work through a problem, not just the result.</p></div></div>
-    </div>
+<Base title="Now" description="A current snapshot of Yosef Getnet’s projects, learning and career focus.">
+  <div class="shell page now-page">
+    <section class="now-heading">
+      <div class="kicker">NOW / FIELD LOG</div>
+      <div class="now-heading-line">
+        <div>
+          <h1>What I’m working on.</h1>
+          <p class="page-intro">A living snapshot of the systems I’m building, the skills I’m practising, and the direction I’m moving in.</p>
+        </div>
+        <div class="updated-stamp">
+          <span class="stamp-label">LAST UPDATED</span>
+          <time datetime="2026-10-27">27 October 2026</time>
+        </div>
+      </div>
+    </section>
+
+    <section class="now-feature panel">
+      <div class="now-feature-copy">
+        <div class="kicker">01 / MAIN BUILD</div>
+        <p class="now-eyebrow">CURRENT PROJECT</p>
+        <h2>EthioNet Pulse</h2>
+        <p class="now-lead">A local network-reliability monitor built to turn vague “the internet is down” complaints into evidence that can be checked and reviewed.</p>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">SQLite</span>
+          <span class="tag">Networking</span>
+        </div>
+        <div class="button-row">
+          <a class="button primary" href="/work/ethionet-pulse">Read the case study →</a>
+          <a class="button" href="https://github.com/Ezra2121-et/ethionet-pulse" target="_blank" rel="noreferrer">Source code ↗</a>
+        </div>
+      </div>
+      <aside class="now-feature-note">
+        <span class="note-index">WHAT I’M TRYING TO GET RIGHT</span>
+        <ul>
+          <li>Tell reachability failures apart from actual service failures.</li>
+          <li>Show measurement coverage beside availability estimates.</li>
+          <li>Keep outage records and diagnostics useful for troubleshooting.</li>
+          <li>Be explicit about what a local prototype can and cannot prove.</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="now-section">
+      <div class="now-section-head">
+        <div>
+          <div class="kicker">02 / STUDY QUEUE</div>
+          <h2>Skills in practice.</h2>
+        </div>
+        <p>I’m prioritising hands-on evidence over collecting more tool names.</p>
+      </div>
+      <div class="now-learning-grid">
+        {currentLearning.map((item) => (
+          <article class="learning-card">
+            <div class="learning-card-top">
+              <span class="learning-number">{item.number}</span>
+              <span class="learning-status">{item.status}</span>
+            </div>
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="now-bottom-grid">
+      <article class="now-note panel">
+        <div class="panel-head">03 / CAREER DIRECTION</div>
+        <div class="now-note-body">
+          <h2>Get close to real systems.</h2>
+          <p>I’m focused on entry-level IT support, network operations and junior cybersecurity opportunities. Full-stack experience is part of my background; my main direction now is infrastructure, troubleshooting and security.</p>
+          <a class="arrow mono" href="/about">More about my background →</a>
+        </div>
+      </article>
+      <article class="now-note panel">
+        <div class="panel-head">04 / KEEPING THE RECORD</div>
+        <div class="now-note-body">
+          <h2>Build. Observe. Write it down.</h2>
+          <p>I want this site to show the actual process: the question, the experiment, what worked, what did not, and what I learned. Notes can be short. They just need to be honest and useful.</p>
+          <a class="arrow mono" href="/writing">Read the notebook →</a>
+        </div>
+      </article>
+    </section>
+
+    <p class="now-footnote mono">This page is a snapshot, not a promise that every item moves forward every day. I update it when my priorities meaningfully change.</p>
   </div>
+  <style>
+    .now-page { padding-top: 52px; }
+    .now-heading { padding-bottom: 24px; border-bottom: 1px solid var(--border-thin); }
+    .now-heading-line { display: flex; align-items: end; justify-content: space-between; gap: 24px; }
+    .now-heading .page-intro { max-width: 600px; margin-bottom: 0; }
+    .updated-stamp { flex: 0 0 auto; border-left: 2px solid var(--accent); padding: 8px 0 8px 12px; display: grid; gap: 5px; font: 10px/1.4 var(--mono); color: var(--text-muted); }
+    .stamp-label, .note-index { color: var(--accent); font-size: 9px; letter-spacing: .1em; }
+    .now-feature { display: grid; grid-template-columns: 1.15fr .85fr; margin: 28px 0 44px; }
+    .now-feature-copy { padding: 26px; }
+    .now-eyebrow { margin: 12px 0 4px; color: var(--text-muted); font: 9px var(--mono); letter-spacing: .12em; }
+    .now-feature h2 { margin: 0 0 12px; color: var(--text-light); font: 600 clamp(26px,4vw,36px)/1.15 var(--sans); }
+    .now-lead { max-width: 560px; color: var(--text-muted); font-size: 14px; line-height: 1.8; margin-bottom: 18px; }
+    .now-feature .button-row { margin-top: 22px; }
+    .now-feature-note { border-left: 1px solid var(--border-thin); padding: 26px; background: var(--accent-soft); }
+    .now-feature-note ul { padding-left: 18px; margin: 14px 0 0; color: var(--text-muted); font-size: 12px; line-height: 1.8; }
+    .now-feature-note li { margin: 8px 0; }
+    .now-section { margin: 42px 0; }
+    .now-section-head { display:flex; justify-content:space-between; align-items:end; gap:20px; margin-bottom:16px; padding-bottom:12px; border-bottom:1px dashed var(--border-thin); }
+    .now-section-head h2 { margin:0; font-size:25px; color:var(--text-light); }
+    .now-section-head p { max-width: 320px; margin:0; color:var(--text-muted); font-size:12px; }
+    .now-learning-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .learning-card { padding:18px; border:1px solid var(--border-thin); background:var(--panel); }
+    .learning-card-top { display:flex; justify-content:space-between; align-items:center; gap:8px; padding-bottom:12px; border-bottom:1px solid var(--border-thin); }
+    .learning-number { color:var(--accent); font:10px var(--mono); }
+    .learning-status { color:var(--text-muted); text-transform:uppercase; letter-spacing:.08em; font:9px var(--mono); }
+    .learning-card h3 { margin:14px 0 8px; color:var(--text-light); font:600 18px/1.3 var(--sans); }
+    .learning-card p { margin:0; color:var(--text-muted); font-size:12px; line-height:1.75; }
+    .now-bottom-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:40px; }
+    .now-note-body { padding:20px; }
+    .now-note-body h2 { margin:0 0 10px; color:var(--text-light); font:600 20px/1.3 var(--sans); }
+    .now-note-body p { color:var(--text-muted); font-size:12px; line-height:1.8; margin:0 0 18px; }
+    .now-footnote { margin-top:28px; padding-top:16px; border-top:1px solid var(--border-thin); color:var(--text-muted); font-size:9px; line-height:1.8; }
+    @media(max-width:720px) {
+      .now-heading-line,.now-section-head { display:block; }
+      .updated-stamp { margin-top:18px; }
+      .now-feature,.now-learning-grid,.now-bottom-grid { grid-template-columns:1fr; }
+      .now-feature-note { border-left:0; border-top:1px solid var(--border-thin); }
+      .now-feature-copy,.now-feature-note { padding:20px; }
+      .now-section-head p { margin-top:10px; }
+    }
+  </style>
 </Base>
