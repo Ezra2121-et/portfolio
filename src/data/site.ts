@@ -73,7 +73,7 @@ export const projects = [
   },
   {
     number: '05',
-    title: 'Pulse Priority Coach',
+    title: 'FocusPulse — Personal Productivity Coach',
     kind: 'Productivity · Full-stack application',
     year: '2026',
     status: 'Prototype',
