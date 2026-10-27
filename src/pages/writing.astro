@@ -1,20 +1,300 @@
 ---
 import Base from '../layouts/Base.astro';
-import { writing } from '../data/site';
+import type { MarkdownInstance } from 'astro';
+
+interface WritingFrontmatter {
+  title: string;
+  date: string | Date;
+  description?: string;
+  category?: string;
+  tags?: string[];
+}
+
+type WritingModule = MarkdownInstance<WritingFrontmatter>;
+
+const posts = Object.values(import.meta.glob<WritingModule>('./writing/*.md', { eager: true }))
+  .filter((post) => Boolean(post.frontmatter?.title && post.url))
+  .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
+
+const featuredPost = posts[0];
+const formatDate = (date: string | Date) =>
+  new Date(date).toLocaleDateString('en', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+const readingTime = (post: WritingModule) =>
+  Math.max(1, Math.ceil(post.rawContent().trim().split(/\s+/).filter(Boolean).length / 200));
+const categoryLabel = (category?: string) => (category ?? 'notes').replace(/-/g, ' ');
 ---
-<Base title="Writing" description="Personal learning notes and technical reflections by Yosef Getnet.">
-  <div class="shell page">
-    <div class="kicker">Writing</div>
-    <h1>Notes & write-ups.</h1>
-    <p class="page-intro">Short learning notes and reflections from my work with Linux, networking, cybersecurity and systems. These are personal learning records—not formal research papers—and I will keep adding concrete lessons as I build and test projects.</p>
-    <div class="writing-list">
-      {writing.map(item => (
-        <a class="writing-row" href={item.href}>
-          <span class="writing-title">{item.title}</span>
-          <span class="writing-meta"><span>#{item.category}</span>{item.tags.map(tag => <span>#{tag}</span>)}</span>
-          <span class="writing-date">{item.date}</span>
+<Base title="Writing" description="A personal technical notebook by Yosef Getnet: learning notes, experiments, troubleshooting and reflections.">
+  <div class="shell page writing-page">
+    <header class="writing-hero">
+      <div class="writing-hero-top">
+        <div>
+          <div class="kicker">THE NOTEBOOK / VOL. 01</div>
+          <h1>Things I’m learning<br /><span>and figuring out.</span></h1>
+        </div>
+        <div class="notebook-mark" aria-hidden="true">
+          <span>FIELD</span>
+          <strong>NOTES</strong>
+          <span>Y.G. / 2026</span>
+        </div>
+      </div>
+      <p class="page-intro">Working notes from Linux, networking, cybersecurity and building useful systems. Not polished claims of expertise—just the question, the experiment, the evidence and the lesson.</p>
+      <div class="writing-hero-foot">
+        <span>{posts.length.toString().padStart(2, '0')} NOTES IN THE ARCHIVE</span>
+        <span>MADE IN ADDIS ABABA · UPDATED AS I LEARN</span>
+      </div>
+    </header>
+
+    {featuredPost && (
+      <section class="latest-note" aria-label="Latest note">
+        <div class="latest-label">
+          <span class="kicker">MOST RECENT NOTE</span>
+          <span class="latest-index">№ 01 / LATEST</span>
+        </div>
+        <a class="latest-content" href={featuredPost.url ?? '/writing'}>
+          <div class="latest-meta">
+            <span>{categoryLabel(featuredPost.frontmatter.category)}</span>
+            <span>·</span>
+            <time datetime={new Date(featuredPost.frontmatter.date).toISOString().slice(0, 10)}>{formatDate(featuredPost.frontmatter.date)}</time>
+            <span>·</span>
+            <span>{readingTime(featuredPost)} MIN READ</span>
+          </div>
+          <h2>{featuredPost.frontmatter.title}</h2>
+          <p>{featuredPost.frontmatter.description ?? 'A note from my learning notebook.'}</p>
+          <span class="latest-link">READ THE NOTE <span aria-hidden="true">↗</span></span>
         </a>
-      ))}
-    </div>
+      </section>
+    )}
+
+    <section class="archive-section" aria-label="Writing archive">
+      <div class="archive-heading">
+        <div>
+          <div class="kicker">THE ARCHIVE</div>
+          <h2>Browse the notes.</h2>
+        </div>
+        <a class="new-note-link" href="https://github.com/Ezra2121-et/portfolio/new/main/src/pages/writing" target="_blank" rel="noreferrer">
+          <span aria-hidden="true">＋</span> WRITE A NEW NOTE ↗
+        </a>
+      </div>
+
+      <div class="archive-tools">
+        <label class="search-box" for="writing-search">
+          <span aria-hidden="true">⌕</span>
+          <input id="writing-search" type="search" placeholder="Search notes, tags, topics…" autocomplete="off" />
+          <kbd>/</kbd>
+        </label>
+        <div class="filter-row" role="group" aria-label="Filter notes by topic">
+          <button class="filter-button is-active" type="button" data-filter="all" aria-pressed="true">All notes</button>
+          <button class="filter-button" type="button" data-filter="linux" aria-pressed="false">Linux</button>
+          <button class="filter-button" type="button" data-filter="networking" aria-pressed="false">Networking</button>
+          <button class="filter-button" type="button" data-filter="security" aria-pressed="false">Security</button>
+          <button class="filter-button" type="button" data-filter="reflection" aria-pressed="false">Reflections</button>
+        </div>
+      </div>
+
+      <div class="archive-count mono" aria-live="polite">
+        <span id="writing-result-count">{posts.length} notes</span>
+        <span>SORTED NEWEST FIRST</span>
+      </div>
+
+      <div class="note-grid" id="writing-grid">
+        {posts.map((post, index) => {
+          const category = post.frontmatter.category ?? 'notes';
+          const tags = post.frontmatter.tags ?? [];
+          const searchText = [post.frontmatter.title, post.frontmatter.description ?? '', category, ...tags].join(' ').toLowerCase();
+          return (
+            <article
+              class:list={['note-card', index === 0 && 'note-card-featured']}
+              data-writing-card
+              data-category={category}
+              data-search={searchText}
+            >
+              <div class="note-card-meta">
+                <span class="note-category">{categoryLabel(category)}</span>
+                <time datetime={new Date(post.frontmatter.date).toISOString().slice(0, 10)}>{formatDate(post.frontmatter.date)}</time>
+              </div>
+              <a class="note-card-main" href={post.url ?? '/writing'}>
+                <h3>{post.frontmatter.title}</h3>
+                <p>{post.frontmatter.description ?? 'A note from my learning notebook.'}</p>
+              </a>
+              <div class="note-card-bottom">
+                <div class="note-tags">
+                  {tags.slice(0, 3).map((tag) => <span>#{tag}</span>)}
+                </div>
+                <span class="note-reading">{readingTime(post)} MIN <span aria-hidden="true">↗</span></span>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+      <div id="writing-empty" class="writing-empty" hidden>
+        <span class="kicker">NO MATCHES</span>
+        <h3>Nothing in the notebook under that search.</h3>
+        <p>Try a different word or clear the topic filter.</p>
+        <button type="button" class="reset-search" id="writing-reset">Clear search and filters ↺</button>
+      </div>
+    </section>
+
+    <section class="writing-prompt">
+      <div class="prompt-number">A NOTE TO FUTURE ME</div>
+      <div>
+        <h2>Make the lesson reusable.</h2>
+        <p>When something finally makes sense, write down what you tried, what you observed, what you got wrong, and how you would debug it next time. A short, honest note is better than a perfect essay that never gets written.</p>
+      </div>
+      <a href="https://github.com/Ezra2121-et/portfolio/blob/main/WRITING_GUIDE.md" target="_blank" rel="noreferrer">OPEN THE WRITING GUIDE ↗</a>
+    </section>
   </div>
+
+  <script>
+    const searchInput = document.querySelector('#writing-search');
+    const cards = Array.from(document.querySelectorAll('[data-writing-card]'));
+    const filterButtons = Array.from(document.querySelectorAll('[data-filter]'));
+    const resultCount = document.querySelector('#writing-result-count');
+    const emptyState = document.querySelector('#writing-empty');
+    const resetButton = document.querySelector('#writing-reset');
+    let activeFilter = 'all';
+
+    const updateArchive = () => {
+      const query = (searchInput?.value ?? '').trim().toLowerCase();
+      let visibleCount = 0;
+
+      cards.forEach((card) => {
+        const categoryMatches = activeFilter === 'all' || card.dataset.category === activeFilter;
+        const searchMatches = !query || (card.dataset.search ?? '').includes(query);
+        const visible = categoryMatches && searchMatches;
+        card.hidden = !visible;
+        if (visible) visibleCount += 1;
+      });
+
+      if (resultCount) resultCount.textContent = visibleCount + (visibleCount === 1 ? ' note' : ' notes');
+      if (emptyState) emptyState.hidden = visibleCount !== 0;
+    };
+
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        activeFilter = button.dataset.filter ?? 'all';
+        filterButtons.forEach((candidate) => {
+          const isActive = candidate === button;
+          candidate.classList.toggle('is-active', isActive);
+          candidate.setAttribute('aria-pressed', String(isActive));
+        });
+        updateArchive();
+      });
+    });
+
+    searchInput?.addEventListener('input', updateArchive);
+
+    resetButton?.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      activeFilter = 'all';
+      filterButtons.forEach((button) => {
+        const isActive = button.dataset.filter === 'all';
+        button.classList.toggle('is-active', isActive);
+        button.setAttribute('aria-pressed', String(isActive));
+      });
+      updateArchive();
+      searchInput?.focus();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      const target = event.target;
+      const typing = target instanceof HTMLElement &&
+        (target.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName));
+      if (event.key === '/' && !typing) {
+        event.preventDefault();
+        searchInput?.focus();
+      }
+      if (event.key === 'Escape' && target === searchInput && searchInput?.value) {
+        searchInput.value = '';
+        updateArchive();
+      }
+    });
+  </script>
+
+  <style>
+    .writing-page { padding-top: 48px; }
+    .writing-hero { padding-bottom: 24px; border-bottom: 1px solid var(--border-thin); }
+    .writing-hero-top { display:flex; justify-content:space-between; align-items:center; gap:24px; }
+    .writing-hero h1 { font-size:clamp(34px,5.5vw,56px); line-height:1.06; letter-spacing:-.035em; }
+    .writing-hero h1 span { color:var(--text-muted); font-style:italic; font-weight:400; }
+    .writing-hero .page-intro { max-width:670px; margin-top:20px; margin-bottom:22px; }
+    .notebook-mark { width:96px; height:112px; flex:0 0 auto; border:1px solid var(--border-strong); border-left:3px solid var(--accent); display:flex; flex-direction:column; justify-content:space-between; padding:10px 8px; color:var(--text-muted); transform:rotate(2deg); font:8px/1.3 var(--mono); letter-spacing:.1em; }
+    .notebook-mark strong { color:var(--text-light); font:600 15px/1.1 var(--sans); letter-spacing:.04em; }
+    .writing-hero-foot { display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap; color:var(--text-muted); font:9px/1.5 var(--mono); letter-spacing:.07em; }
+    .latest-note { display:grid; grid-template-columns:150px 1fr; margin:26px 0 48px; border:1px solid var(--border-thin); background:var(--panel); }
+    .latest-label { padding:20px 16px; border-right:1px solid var(--border-thin); display:flex; flex-direction:column; justify-content:space-between; gap:20px; }
+    .latest-label .kicker { margin:0; font-size:9px; }
+    .latest-index { color:var(--text-muted); font:9px var(--mono); letter-spacing:.08em; }
+    .latest-content { display:block; padding:22px 25px; transition:background .2s ease; }
+    .latest-content:hover { background:var(--accent-soft); }
+    .latest-meta { display:flex; flex-wrap:wrap; gap:8px; color:var(--text-muted); text-transform:uppercase; font:9px/1.5 var(--mono); letter-spacing:.07em; }
+    .latest-meta span:first-child { color:var(--accent); }
+    .latest-content h2 { margin:13px 0 8px; color:var(--text-light); font:600 clamp(22px,3vw,30px)/1.2 var(--sans); letter-spacing:-.02em; }
+    .latest-content p { max-width:650px; margin:0 0 17px; color:var(--text-muted); font-size:12px; line-height:1.75; }
+    .latest-link { color:var(--accent); font:9px var(--mono); letter-spacing:.1em; }
+    .archive-section { padding-bottom:42px; }
+    .archive-heading { display:flex; justify-content:space-between; align-items:end; gap:18px; padding-bottom:13px; border-bottom:1px dashed var(--border-thin); }
+    .archive-heading h2 { margin:0; color:var(--text-light); font:600 26px/1.2 var(--sans); }
+    .archive-heading .kicker { margin-bottom:5px; }
+    .new-note-link { display:inline-flex; align-items:center; gap:7px; color:var(--accent); font:9px/1.5 var(--mono); letter-spacing:.06em; }
+    .new-note-link:hover { text-decoration:underline; text-underline-offset:4px; }
+    .new-note-link span { font-size:15px; }
+    .archive-tools { display:grid; grid-template-columns:minmax(180px,.75fr) 1.25fr; gap:18px; margin:19px 0 13px; align-items:center; }
+    .search-box { min-width:0; display:flex; align-items:center; gap:10px; border:1px solid var(--border-thin); padding:10px 12px; color:var(--text-muted); }
+    .search-box:focus-within { border-color:var(--accent); }
+    .search-box > span { font-size:19px; line-height:1; }
+    .search-box input { width:100%; min-width:0; padding:0; outline:none; border:0; background:transparent; color:var(--text-light); font:11px/1.6 var(--mono); }
+    .search-box input::placeholder { color:var(--text-muted); opacity:.8; }
+    .search-box kbd { border:1px solid var(--border-thin); padding:1px 5px; color:var(--text-muted); font:10px var(--mono); }
+    .filter-row { display:flex; justify-content:flex-end; gap:5px; flex-wrap:wrap; }
+    .filter-button { padding:7px 9px; border:1px solid var(--border-thin); background:transparent; color:var(--text-muted); cursor:pointer; font:9px/1.3 var(--mono); transition:border-color .15s ease,color .15s ease,background .15s ease; }
+    .filter-button:hover,.filter-button.is-active { border-color:var(--accent); color:var(--accent); background:var(--accent-soft); }
+    .archive-count { display:flex; justify-content:space-between; gap:12px; margin:18px 0 9px; color:var(--text-muted); font-size:9px; letter-spacing:.08em; }
+    .note-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .note-card { display:flex; flex-direction:column; min-width:0; min-height:212px; padding:18px; border:1px solid var(--border-thin); background:var(--bg); transition:border-color .18s ease,transform .18s ease,background .18s ease; }
+    .note-card:hover { border-color:var(--accent); transform:translateY(-2px); background:var(--panel); }
+    .note-card[hidden] { display:none; }
+    .note-card-featured { grid-column:1/-1; min-height:170px; }
+    .note-card-meta { display:flex; justify-content:space-between; align-items:center; gap:12px; color:var(--text-muted); font:9px/1.4 var(--mono); }
+    .note-category { color:var(--accent); text-transform:uppercase; letter-spacing:.09em; }
+    .note-card-main { display:block; flex:1; padding:19px 0 15px; }
+    .note-card-main h3 { margin:0 0 9px; color:var(--text-light); font:600 20px/1.28 var(--sans); letter-spacing:-.015em; }
+    .note-card-featured .note-card-main h3 { max-width:720px; font-size:clamp(23px,3vw,29px); }
+    .note-card-main:hover h3 { color:var(--accent); }
+    .note-card-main p { max-width:720px; margin:0; color:var(--text-muted); font-size:12px; line-height:1.75; }
+    .note-card-bottom { display:flex; justify-content:space-between; align-items:end; gap:10px; padding-top:13px; border-top:1px solid var(--border-thin); }
+    .note-tags { display:flex; flex-wrap:wrap; gap:8px; color:var(--text-muted); font:9px/1.5 var(--mono); }
+    .note-reading { color:var(--text-muted); flex:0 0 auto; font:9px var(--mono); letter-spacing:.05em; }
+    .note-reading span { color:var(--accent); }
+    .writing-empty { padding:34px 18px; margin-top:12px; border:1px dashed var(--border-strong); text-align:center; }
+    .writing-empty[hidden] { display:none; }
+    .writing-empty h3 { color:var(--text-light); font:600 21px var(--sans); margin:8px 0; }
+    .writing-empty p { color:var(--text-muted); font-size:12px; }
+    .reset-search { border:0; padding:8px; color:var(--accent); background:transparent; cursor:pointer; font:10px var(--mono); }
+    .writing-prompt { display:grid; grid-template-columns:150px 1fr auto; gap:20px; align-items:start; margin-top:8px; padding:24px 0; border-top:1px solid var(--border-thin); }
+    .prompt-number { color:var(--accent); font:9px/1.6 var(--mono); letter-spacing:.09em; }
+    .writing-prompt h2 { margin:0 0 8px; color:var(--text-light); font:600 21px/1.25 var(--sans); }
+    .writing-prompt p { max-width:570px; margin:0; color:var(--text-muted); font-size:12px; line-height:1.8; }
+    .writing-prompt > a { color:var(--accent); font:9px/1.7 var(--mono); letter-spacing:.05em; }
+    @media(max-width:760px) {
+      .writing-hero-top { align-items:flex-start; }
+      .notebook-mark { width:76px; height:96px; }
+      .latest-note { grid-template-columns:1fr; }
+      .latest-label { flex-direction:row; align-items:center; border-right:0; border-bottom:1px solid var(--border-thin); padding:12px 15px; }
+      .latest-content { padding:19px; }
+      .archive-tools { grid-template-columns:1fr; gap:12px; }
+      .filter-row { justify-content:flex-start; }
+      .note-grid { grid-template-columns:1fr; }
+      .note-card-featured { grid-column:auto; }
+      .writing-prompt { grid-template-columns:1fr; gap:10px; }
+    }
+    @media(max-width:430px) {
+      .writing-hero-top { gap:12px; }
+      .notebook-mark { display:none; }
+      .writing-hero-foot { flex-direction:column; gap:5px; }
+      .archive-heading { display:block; }
+      .new-note-link { margin-top:14px; }
+      .archive-count { font-size:8px; }
+    }
+  </style>
 </Base>
