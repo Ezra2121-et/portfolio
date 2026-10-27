@@ -57,6 +57,32 @@ export const projects = [
     href: '/work/ai-career-guide',
     source: 'https://github.com/Ezra2121-et/career-guide-ai',
     demo: 'https://career-guide-ai-nine.vercel.app'
+  },
+  {
+    number: '04',
+    title: 'Governance Policy Management System',
+    kind: 'Backend Engineering · Distributed systems',
+    year: '2026',
+    status: 'Backend project',
+    description:
+      'A Java microservices system for policy approval and traceable audit events, using gateway security, service discovery, Kafka, gRPC and a compensating approval workflow.',
+    stack: ['Java 21', 'Spring Boot', 'Kafka', 'gRPC', 'PostgreSQL'],
+    href: '/work/governance-policy-system',
+    source: 'https://github.com/Ezra2121-et/governance-policy-system',
+    demo: ''
+  },
+  {
+    number: '05',
+    title: 'Pulse Priority Coach',
+    kind: 'Productivity · Full-stack application',
+    year: '2026',
+    status: 'Prototype',
+    description:
+      'A task and focus dashboard with task prioritisation, a Kanban workflow, Pomodoro sessions, productivity analytics, exports and optional AI suggestions.',
+    stack: ['React', 'TypeScript', 'TanStack Start', 'Supabase', 'Tailwind CSS'],
+    href: '/work/pulse-priority-coach',
+    source: 'https://github.com/Ezra2121-et/pulse-priority-coach',
+    demo: ''
   }
 ];
 
