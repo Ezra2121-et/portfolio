@@ -3,7 +3,7 @@ export const site = {
   alias: 'Jossy',
   title: 'IT Support · Networking · Cybersecurity',
   intro:
-    'I am a 2026 Computer Science graduate from the University of Gondar, building a career in IT support, network operations and security operations. I am hands-on with Linux, Cisco networking, Python and web security labs, and I bring a full-stack background: during my internship I led a 9-member team. I learn fast, document what I do, and turn messy problems into reliable, working solutions.',
+    'I graduated in Computer Science from the University of Gondar in 2026. I am looking for entry-level IT support, networking and cybersecurity roles. I use Linux, Cisco Packet Tracer, Python and security labs to build my skills. During my AMECO internship, I led a team of nine on a visitor management system.',
   email: 'johustler21@gmail.com',
   location: 'Addis Ababa, Ethiopia',
   timezone: 'EAT (UTC +3)',
@@ -73,7 +73,7 @@ export const projects = [
   },
   {
     number: '05',
-    title: 'FocusPulse — Personal Productivity Coach',
+    title: 'FocusPulse: Personal Productivity Coach',
     kind: 'Productivity · Full-stack application',
     year: '2026',
     status: 'Prototype',
@@ -103,7 +103,7 @@ export const experience = [
   {
     role: 'Full-Stack Developer Intern',
     org: 'Amhara Media Corporation (AMECO), Bahir Dar',
-    period: 'Jun 2025 – Aug 2025',
+    period: 'Jun 2025 - Aug 2025',
     points: [
       'Led a 9-member team building a full-stack Visitor Management System from planning to delivery.',
       'Designed and optimized database queries for media content and user data.',
