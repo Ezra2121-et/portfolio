@@ -20,11 +20,11 @@ const { title = site.name, description = site.intro } = Astro.props;
     <header class="nav shell">
       <a class="brand" href="/" aria-label="Yosef Getnet home">Yosef Getnet<span>_</span></a>
       <nav aria-label="Primary">
-        <a href="/" class={Astro.url.pathname === '/' ? 'active' : ''}>HOME</a>
-        <a href="/work" class={Astro.url.pathname.startsWith('/work') ? 'active' : ''}>WORK</a>
-        <a href="/about" class={Astro.url.pathname === '/about' ? 'active' : ''}>ABOUT</a>
-        <a href="/now" class={Astro.url.pathname === '/now' ? 'active' : ''}>NOW</a>
-        <a href="/writing" class={Astro.url.pathname.startsWith('/writing') ? 'active' : ''}>WRITING</a>
+        <a href="/" data-nav-route="home" class={Astro.url.pathname === '/' ? 'active' : ''}>HOME</a>
+        <a href="/work" data-nav-route="work" class={Astro.url.pathname.startsWith('/work') ? 'active' : ''}>WORK</a>
+        <a href="/about" data-nav-route="about" class={Astro.url.pathname === '/about' ? 'active' : ''}>ABOUT</a>
+        <a href="/now" data-nav-route="now" class={Astro.url.pathname === '/now' ? 'active' : ''}>NOW</a>
+        <a href="/writing" data-nav-route="writing" class={Astro.url.pathname.startsWith('/writing') ? 'active' : ''}>WRITING</a>
       </nav>
       <button class="theme-toggle" type="button" aria-label="Toggle theme" title="Toggle light/dark theme"><span class="sun">◐</span><span class="dot"></span></button>
     </header>
@@ -40,6 +40,27 @@ const { title = site.name, description = site.intro } = Astro.props;
       const root = document.documentElement;
       const stored = localStorage.getItem('theme');
       if (stored) root.dataset.theme = stored;
+
+      // Keep the selected navigation item in sync during client-side transitions.
+      const normalizePath = (path) => path !== '/' ? path.replace(/\\/+$/, '') : '/';
+      const updateActiveNavigation = () => {
+        const currentPath = normalizePath(window.location.pathname);
+        document.querySelectorAll('.nav nav a[data-nav-route]').forEach((link) => {
+          const href = new URL(link.href, window.location.origin).pathname;
+          const route = link.dataset.navRoute;
+          const normalizedHref = normalizePath(href);
+          const active = route === 'home'
+            ? currentPath === '/'
+            : currentPath === normalizedHref || currentPath.startsWith(normalizedHref + '/');
+
+          link.classList.toggle('active', active);
+          if (active) link.setAttribute('aria-current', 'page');
+          else link.removeAttribute('aria-current');
+        });
+      };
+
+      updateActiveNavigation();
+      document.addEventListener('astro:page-load', updateActiveNavigation);
 
       // Delegate the click so the theme toggle keeps working after page transitions.
       document.addEventListener('click', (event) => {
