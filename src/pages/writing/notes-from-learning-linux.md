@@ -20,10 +20,10 @@ That small difference changes what I check next.
 
 These commands are useful starting points because they show system state before I change anything:
 
-- `ip addr` — inspect network interfaces and addresses.
-- `ip route` — inspect the routing table and default route.
-- `ss -tulpn` — inspect listening sockets and services.
-- `journalctl -b` — review logs from the current boot.
+- `ip addr`: inspect network interfaces and addresses.
+- `ip route`: inspect the routing table and default route.
+- `ss -tulpn`: inspect listening sockets and services.
+- `journalctl -b`: review logs from the current boot.
 
 The goal is not to run every command every time. It is to choose one that can answer the question I actually have.
 
@@ -41,6 +41,6 @@ This is slower than guessing for the first few seconds, but it gives me a better
 
 Terminal output can contain internal addresses, usernames, hostnames, file paths and other details. Before publishing a command transcript, remove private information and secrets.
 
-## The takeaway
+## What I learned
 
 I want Linux to feel less like a list of commands to memorise and more like a system I can inspect. A useful command is one that helps answer a specific question.
