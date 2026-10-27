@@ -1,0 +1,60 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base
+  title="Governance Policy Management System"
+  description="A Java and Spring Boot microservices project exploring policy workflows, distributed service communication and auditable changes."
+>
+  <div class="shell page">
+    <div class="kicker">// PROJECT 04 · BACKEND ENGINEERING · 2026</div>
+    <h1>Governance Policy Management System.</h1>
+    <p class="page-intro">
+      A backend-focused microservices system for managing policy lifecycles and recording auditable events. It explores how service boundaries, gateway controls and reliable messaging fit together in a distributed application.
+    </p>
+
+    <div class="button-row" style="margin: 18px 0 28px">
+      <a class="button primary" href="https://github.com/Ezra2121-et/governance-policy-system" target="_blank" rel="noreferrer">View source on GitHub ↗</a>
+    </div>
+
+    <div class="article">
+      <div class="prose">
+        <h2>What it demonstrates</h2>
+        <ul>
+          <li>A policy lifecycle from draft to approval or rejection.</li>
+          <li>An API Gateway with JWT authentication, Redis rate limiting, circuit breaking and service-discovery-based routing.</li>
+          <li>Service discovery through Eureka and separate PostgreSQL databases for governance and audit data.</li>
+          <li>Asynchronous audit events through Kafka and an outbox publisher.</li>
+          <li>A synchronous gRPC audit confirmation step for approvals, modelled as a Saga with a compensating action if confirmation fails.</li>
+        </ul>
+
+        <h2>Architecture</h2>
+        <p>
+          The repository separates the API Gateway, Governance Service, Audit Service and Eureka Server. External requests enter through the gateway; internal services communicate with REST or gRPC where appropriate, while Kafka handles asynchronous audit events.
+        </p>
+
+        <h2>Technology</h2>
+        <div class="tags">
+          <span class="tag">Java 21</span>
+          <span class="tag">Spring Boot</span>
+          <span class="tag">Spring Cloud Gateway</span>
+          <span class="tag">Eureka</span>
+          <span class="tag">Apache Kafka</span>
+          <span class="tag">gRPC</span>
+          <span class="tag">Redis</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">Docker Compose</span>
+        </div>
+
+        <h2>How to explore it</h2>
+        <p>
+          The source repository includes a Docker Compose setup, service startup steps, API examples, test commands and a design write-up explaining the Outbox and Saga patterns. This is presented as a local development project; no public demo is listed.
+        </p>
+
+        <p style="margin-top: 28px">
+          <a class="arrow mono" href="https://github.com/Ezra2121-et/governance-policy-system" target="_blank" rel="noreferrer">Read the architecture notes and setup guide ↗</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</Base>
