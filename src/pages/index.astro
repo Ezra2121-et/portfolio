@@ -2,10 +2,24 @@
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import SectionHead from '../components/SectionHead.astro';
-import { site, projects, writing, stack, currently } from '../data/site';
+import { site, projects, stack, currently } from '../data/site';
+import type { MarkdownInstance } from 'astro';
+
+interface WritingFrontmatter {
+  title: string;
+  date: string | Date;
+  description?: string;
+  category?: string;
+  tags?: string[];
+}
+
+type WritingModule = MarkdownInstance<WritingFrontmatter>;
 
 const featured = projects.slice(0, 3);
-const recentWriting = writing.slice(0, 5);
+const writingPosts = Object.values(import.meta.glob<WritingModule>('./writing/*.md', { eager: true }))
+  .filter((post) => Boolean(post.frontmatter?.title && post.url))
+  .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
+const recentWriting = writingPosts.slice(0, 5);
 
 const metrics = [
   ['09', 'member team led at AMECO'],
@@ -327,16 +341,16 @@ const metrics = [
 
           <a
             class="writing-row"
-            href={item.href}
+            href={item.url ?? '/writing'}
           >
 
             <span class="writing-title">
-              {item.title}
+              {item.frontmatter.title}
             </span>
 
             <span class="writing-meta">
 
-              {item.tags.map(tag => (
+              {(item.frontmatter.tags ?? []).map(tag => (
                 <span>
                   #{tag}
                 </span>
@@ -345,7 +359,7 @@ const metrics = [
             </span>
 
             <span class="writing-date">
-              {item.date}
+              {new Date(item.frontmatter.date).toISOString().slice(0, 10)}
             </span>
 
           </a>
