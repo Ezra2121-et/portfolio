@@ -49,9 +49,7 @@ const categoryLabel = (category?: string) => (category ?? 'notes').replace(/-/g,
           <div class="kicker">THE ARCHIVE</div>
           <h2>Browse the notes.</h2>
         </div>
-        <a class="new-note-link" href="https://github.com/Ezra2121-et/portfolio/new/main/src/pages/writing" target="_blank" rel="noreferrer">
-          <span aria-hidden="true">＋</span> WRITE A NEW NOTE ↗
-        </a>
+
       </div>
 
       <div class="archive-tools">
@@ -119,7 +117,7 @@ const categoryLabel = (category?: string) => (category ?? 'notes').replace(/-/g,
         <h2>What goes into a note</h2>
         <p>I usually start with a question, describe what I tried, and record the result. If I made a mistake, I include that too. The note does not need to be long.</p>
       </div>
-      <a href="https://github.com/Ezra2121-et/portfolio/blob/main/WRITING_GUIDE.md" target="_blank" rel="noreferrer">OPEN THE WRITING GUIDE ↗</a>
+
     </section>
   </div>
 
@@ -252,11 +250,10 @@ const categoryLabel = (category?: string) => (category ?? 'notes').replace(/-/g,
     .writing-empty h3 { color:var(--text-light); font:600 21px var(--sans); margin:8px 0; }
     .writing-empty p { color:var(--text-muted); font-size:12px; }
     .reset-search { border:0; padding:8px; color:var(--accent); background:transparent; cursor:pointer; font:10px var(--mono); }
-    .writing-prompt { display:grid; grid-template-columns:150px 1fr auto; gap:20px; align-items:start; margin-top:8px; padding:24px 0; border-top:1px solid var(--border-thin); }
+    .writing-prompt { display:grid; grid-template-columns:150px minmax(0,1fr); gap:20px; align-items:start; margin-top:8px; padding:24px 0; border-top:1px solid var(--border-thin); }
     .prompt-number { color:var(--accent); font:9px/1.6 var(--mono); letter-spacing:.09em; }
     .writing-prompt h2 { margin:0 0 8px; color:var(--text-light); font:600 21px/1.25 var(--sans); }
     .writing-prompt p { max-width:570px; margin:0; color:var(--text-muted); font-size:12px; line-height:1.8; }
-    .writing-prompt > a { color:var(--accent); font:9px/1.7 var(--mono); letter-spacing:.05em; }
     @media(max-width:760px) {
       .writing-hero-top { align-items:flex-start; }
       .notebook-mark { width:76px; height:96px; }
