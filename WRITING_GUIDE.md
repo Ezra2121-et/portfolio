@@ -1,16 +1,16 @@
-# Writing a new portfolio note
+# Maintainer guide: publishing a portfolio note
 
-You only need to add **one Markdown file**. The Writing archive and the homepage's recent-writing list read Markdown files automatically, so do not edit the site data file to register a post.
+This workflow is for the repository owner and trusted maintainers with write access. Visitors can read the public blog, but there is no public submission or publishing form. Only authorised maintainers can change the website's content.
 
-## Quick workflow in the browser
+## Owner-only publishing workflow
 
-1. Open the [writing folder on GitHub](https://github.com/Ezra2121-et/portfolio/tree/main/src/pages/writing).
-2. Choose **Add file → Create new file**.
+1. Sign in to the GitHub account that has write access to this repository, then open `src/pages/writing/`.
+2. Choose **Add file → Create new file**. Do not give repository write access to people who should not be able to publish.
 3. Name it with a short, lowercase URL slug, for example `what-i-learned-from-a-network-outage.md`.
 4. Paste the template below and write your note in Markdown.
 5. Commit the file to `main`. Vercel should deploy it automatically.
 
-Direct shortcut: [create a new writing file on GitHub](https://github.com/Ezra2121-et/portfolio/new/main/src/pages/writing).
+3. Commit your article to the configured deployment branch. Vercel publishes the update after a successful deployment.
 
 ## Copy-and-paste template
 
