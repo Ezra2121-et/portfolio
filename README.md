@@ -56,10 +56,6 @@ npm run preview
 The Astro configuration targets static output for Vercel and uses `https://jossy.dev` as the canonical site URL. Connect this repository to Vercel to build and deploy commits from the chosen branch.
 
 
-## Write a new note
+## Publishing writing
 
-Add one Markdown file inside `src/pages/writing/`. The Writing archive and homepage recent-writing list are generated from Markdown frontmatter automatically, so there is no separate list to update.
-
-- Read the [writing guide](WRITING_GUIDE.md) for the copy-and-paste template and publishing steps.
-- [Create a new writing file on GitHub](https://github.com/Ezra2121-et/portfolio/new/main/src/pages/writing).
-- Each note uses `src/layouts/WritingPost.astro` for the shared article layout.
+The public website is read-only for visitors. New articles are added by the repository owner or another trusted maintainer with write access. Articles in `src/pages/writing/` are published automatically from the repository's deployment branch; visitors cannot publish directly from the website. Each article uses `src/layouts/WritingPost.astro` for the shared layout.
