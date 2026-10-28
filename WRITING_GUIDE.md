@@ -1,24 +1,23 @@
-# Maintainer guide: publishing a portfolio note
+# Maintainer guide: publishing a writing post
 
-This workflow is for the repository owner and trusted maintainers with write access. Visitors can read the public blog, but there is no public submission or publishing form. Only authorised maintainers can change the website's content.
+This guide is for the portfolio owner and trusted maintainers with repository write access. The website is read-only for visitors. There is no public writing form, and visitors cannot publish posts directly to the live site.
 
-## Owner-only publishing workflow
+## Publish a post
 
-1. Sign in to the GitHub account that has write access to this repository, then open `src/pages/writing/`.
-2. Choose **Add file → Create new file**. Do not give repository write access to people who should not be able to publish.
-3. Name it with a short, lowercase URL slug, for example `what-i-learned-from-a-network-outage.md`.
-4. Paste the template below and write your note in Markdown.
-5. Commit the file to `main`. Vercel should deploy it automatically.
+1. Sign in to the GitHub account that has write access to this repository.
+2. Open \`src/pages/writing/\` and create a new Markdown file with a short, lowercase filename, for example \`what-i-learned-from-a-network-outage.md\`.
+3. Copy the template below and write your post.
+4. Commit your changes to the configured deployment branch. Vercel will publish the post after a successful deployment.
 
-3. Commit your article to the configured deployment branch. Vercel publishes the update after a successful deployment.
+The Writing archive and homepage discover Markdown posts automatically, so you do not need to update a separate index.
 
-## Copy-and-paste template
+## Template
 
-```md
+\`\`\`md
 ---
 layout: ../../layouts/WritingPost.astro
 title: "A clear title that says what I learned"
-date: 2026-10-27
+date: 2026-10-28
 description: "One sentence that tells readers what this note covers."
 category: networking
 tags:
@@ -33,37 +32,23 @@ What were you trying to understand or fix?
 
 ## What I did
 
-Describe the steps you actually tried. Include commands or code in fenced blocks when useful.
+Describe the steps you actually tried. Include commands or code blocks when useful.
 
 ## What happened
 
-Record the evidence you observed. Separate what you know from what you suspect.
+Record what you observed. Separate facts from guesses.
 
 ## What I learned
 
 What makes more sense now? What would you try next time?
-```
+\`\`\`
 
 ## Categories
 
-Use one of these category values so the archive filters work:
+Use one of these values: \`linux\`, \`networking\`, \`security\`, or \`reflection\`. Use lowercase tags.
 
-- `linux`
-- `networking`
-- `security`
-- `reflection`
+Before publishing, check the title, date, and description; remove passwords, API tokens, private logs, and other people's identifying information.
 
-Use lowercase tags. Aim for a useful short note rather than a long essay. Do not include passwords, API tokens, private logs, or identifying information from other people or organizations.
+## How posts appear
 
-## Writing checklist
-
-- Is the title specific?
-- Does the description fit in one sentence?
-- Are the date and category set?
-- Did I separate observed facts from assumptions?
-- Have I removed secrets and private information?
-- Does the note explain one useful thing someone else could learn?
-
-## How it works
-
-Files inside the writing pages folder automatically become article pages. The Writing archive and homepage discover them with Astro's Markdown imports, sort them by date, and display their frontmatter. Each article uses the shared WritingPost layout.
+Files in \`src/pages/writing/*.md\` become article pages. The Writing archive and homepage read their frontmatter and sort posts by date. Each article uses \`src/layouts/WritingPost.astro\`.
